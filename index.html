@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>AR Builder | Premium Construction Company Chennai</title>
+<meta name="description" content="AR Builder is an architecture and construction firm, established in 2010, with 32+ projects across Tamil Nadu including Montfort Academy Higher Secondary School, Mylapore.">
+<link rel="icon" type="image/png" href="assets/ar-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* No blue tap flash or text selection on interactive elements (mostly visible on phones) */
+a,button,label,select,[role="button"],.flip{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+:focus:not(:focus-visible){outline:none}
+/* Page gutter: 5% of the width, but content never grows wider than 1520px on big displays */
+:root{--gutter:max(5vw,calc((100vw - 1520px) / 2))}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+/* No overflow:hidden while the menu is open: hiding the scrollbar widened the page and made it jump.
+   A stopped Lenis already blocks wheel/touch scrolling. */
+body{margin:0;background:#F8F5F0;color:#0A0A0A;font-family:"Inter",sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-0.02em;line-height:1.32;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6{margin:0;font-family:"Switzer",sans-serif;font-weight:500;letter-spacing:-0.04em;line-height:1.12;font-feature-settings:"cv09","cv03","cv04","cv11"}
+p{margin:0}
+a{color:#0A0A0A;text-decoration:none}
+a:hover{color:#4A4A44}
+button{font:inherit;cursor:pointer}
+img,video{display:block}
+.ar-strip{scrollbar-width:none}.ar-strip::-webkit-scrollbar{display:none}
+.flip{position:relative;display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:top}
+.flip__row{display:flex}
+.flip__row--b{position:absolute;inset:0}
+.flip__ch{display:inline-block;white-space:pre;transition:transform .3s ease-in-out}
+.flip__row--b .flip__ch{transform:translate3d(0,110%,0)}
+.flip:hover .flip__row .flip__ch,.flip:focus-visible .flip__row .flip__ch{transform:translate3d(0,-110%,0)}
+.flip:hover .flip__row--b .flip__ch,.flip:focus-visible .flip__row--b .flip__ch{transform:none}
+@media (prefers-reduced-motion: reduce){.flip__ch{transition:none !important}}
+/* On-site reels: all five share the row on laptops/desktops; a swipe strip below 900px */
+.reels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+/* Phones: reel cards stay put (no scroll-reveal), since cards off to the side of the swipe row were
+   being reset 32px lower and sliding back up as they came into view */
+@media (max-width:899px){.reels > [data-reveal]{opacity:1 !important;transform:none !important;transition:none !important}}
+/* Phones: contact email scales with the screen so it stays on one line under "Get in touch" */
+@media (max-width:767px){.contact-email{font-size:min(5.4vw,32px) !important;white-space:nowrap;overflow-wrap:normal !important}}
+@media (max-width:899px){.reels{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(62vw,300px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -5vw;padding:0 var(--gutter);scroll-padding:0 5vw}.reels::-webkit-scrollbar{display:none}}
+/* About page motion */
+@keyframes kenBurns{from{transform:scale(1.14)}to{transform:scale(1)}}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (min-width:900px){.about-sticky{position:sticky;top:120px}}
+/* "What we do": hovering a service expands its row and reveals its photo inside (desktop mouse only) */
+.svc-media{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:900px){
+  .svc-media{display:grid;grid-template-rows:0fr;transition:grid-template-rows .75s cubic-bezier(.22,1,.36,1)}
+  .is-open > .svc-media{grid-template-rows:1fr}
+  .svc-media__clip{min-height:0;overflow:hidden}
+  .svc-media__frame{padding:0 0 clamp(22px,2.4vw,34px) 104px}
+  .svc-media__photo{position:relative;width:clamp(260px,26vw,380px);aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#EDE7DC;
+    opacity:0;transform:translate3d(0,18px,0);clip-path:inset(0 0 100% 0 round 16px);
+    transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1),clip-path .8s cubic-bezier(.22,1,.36,1)}
+  .is-open .svc-media__photo{opacity:1;transform:none;clip-path:inset(0 0 0 0 round 16px);transition-delay:.08s}
+  .svc-media__img{position:absolute;inset:0;background:center 55%/cover no-repeat;transform:scale(1.14);transition:transform 1.3s cubic-bezier(.22,1,.36,1)}
+  .is-open .svc-media__img{transform:none}
+  .svc-media__img[data-i="0"]{background-image:url(assets/services/architecture.webp)}
+  .svc-media__img[data-i="1"]{background-image:url(assets/services/construction.jpg)}
+  .svc-media__img[data-i="2"]{background-image:url(assets/services/interior.jpg)}
+  .svc-media__img[data-i="3"]{background-image:url(assets/services/renovation.jpg)}
+  .svc-media__img[data-i="4"]{background-image:url(assets/services/turnkey.jpg)}
+  .svc-media__img[data-i="5"]{background-image:url(assets/services/spaceplanning.jpg)}
+  .svc-media__img[data-i="6"]{background-image:url(assets/services/jointventure.jpg)}
+  .is-open > .svc-row{padding-left:20px !important}
+}
+@media (prefers-reduced-motion: reduce){.svc-media,.svc-media__photo,.svc-media__img{transition:none !important}}
+/* Services list: once the row wraps (narrow screens), pin the arrow top-right, level with the number */
+@media (max-width:899px){
+  .svc-row{position:relative;padding-right:56px !important}
+  .svc-arrow{position:absolute;top:clamp(20px,2.2vw,32px);right:0;margin-top:-8px}
+}
+/* About hero on phones: eyebrow + heading sit at the top (over the ceiling, just under the header),
+   paragraph at the bottom, so the middle of the photo stays clear; small centred scroll cue */
+@media (max-width:767px){
+  .ah-content{top:0 !important;padding-top:92px !important;padding-bottom:20px !important;gap:12px !important}
+  .ah-title{font-size:38px !important}
+  .ah-row{margin-top:auto !important;flex-direction:column !important;align-items:stretch !important;gap:22px !important}
+  /* Shown directly: it sits in the bottom band the scroll-reveal treats as off-screen */
+  .ah-cue{position:relative !important;align-self:stretch !important;justify-content:flex-start !important;font-size:10px !important;letter-spacing:0.08em !important;color:rgba(255,255,255,0.5) !important;opacity:1 !important;transform:none !important}
+  .ah-cue{min-height:18px}
+  .ah-cue > span:first-child{display:none}
+  .ah-cue__line{position:absolute !important;left:50% !important;top:50% !important;height:18px !important;transform:translate(-50%,-50%) !important}
+}
+.about-card{transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s cubic-bezier(.22,1,.36,1)}
+.about-card:hover{transform:translateY(-6px);box-shadow:0 28px 56px -28px rgba(10,10,10,0.28)}
+.about-card__line{position:absolute;left:0;top:0;height:2px;width:100%;background:#C8A96E;transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.about-card:hover .about-card__line{transform:scaleX(1)}
+.about-card__arrow{transition:transform .5s cubic-bezier(.22,1,.36,1),background .4s}
+.about-card:hover .about-card__arrow{transform:rotate(45deg);background:#C8A96E !important}
+@media (prefers-reduced-motion: reduce){main[data-screen-label="About"] img,[data-about-cue]{animation:none !important}}
+::selection{background:#C8A96E;color:#0A0A0A}
+input::placeholder,textarea::placeholder{color:#888880}
+/* No visible page scrollbar (the gold progress line under the header shows position); scrolling still works */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes lineUp{from{transform:translate3d(0,110%,0)}to{transform:none}}
+@keyframes growLine{from{width:0}to{width:100%}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes menuIn{from{transform:translate3d(0,-100%,0)}to{transform:translate3d(0,0,0)}}
+@keyframes menuOut{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-100%,0)}}
+@keyframes heroCue{0%{transform:translate3d(0,0,0);opacity:0}25%{opacity:1}80%{opacity:1}100%{transform:translate3d(0,9px,0);opacity:0}}
+@keyframes swipeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+@keyframes swipeR{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+@keyframes logoBuild{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes levelRise{0%{top:100%;opacity:0}10%{opacity:1}85%{opacity:1}100%{top:0%;opacity:0}}
+@keyframes cornerIn{from{opacity:0;transform:scale(1.35)}to{opacity:1;transform:none}}
+@keyframes logoSettle{from{transform:scale(.94)}to{transform:none}}
+@media (prefers-reduced-motion: reduce){[data-hero-dot]{animation:none !important;opacity:1 !important}[data-loader-anim],[data-swipe-l],[data-swipe-r]{animation:none !important}}
+/* Contact form dropdowns: frosted-glass option panel (replaces the browser's native select list) */
+.dd{position:relative}
+.dd__btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-bottom:1px solid rgba(10,10,10,0.3);border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;text-align:left;cursor:pointer;outline:none;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1)}
+.dd__btn:focus-visible,.dd.is-open .dd__btn{border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E}
+.dd__val{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd__val.is-empty{color:#888880}
+.dd__chev{flex:none;margin-right:4px;fill:none;stroke:#0A0A0A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.dd.is-open .dd__chev{transform:rotate(180deg)}
+.dd__panel{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:40;margin:0;padding:6px;list-style:none;max-height:min(400px,60vh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  border-radius:18px;border:1px solid rgba(255,255,255,0.7);
+  background:linear-gradient(145deg,rgba(255,255,255,0.48) 0%,rgba(255,255,255,0.2) 100%);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+  box-shadow:0 28px 56px -18px rgba(74,56,24,0.32),0 2px 10px rgba(74,56,24,0.06),inset 0 1px 0 rgba(255,255,255,0.9),inset 0 -1px 0 rgba(255,255,255,0.25);
+  transform-origin:top center;animation:ddIn .32s cubic-bezier(.22,1,.36,1) both}
+.dd__opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:12px;font-size:16px;line-height:1.2;color:#0A0A0A;cursor:pointer;transition:background .2s ease,box-shadow .2s ease}
+.dd__opt.is-hi{background:rgba(255,255,255,0.62);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.85),0 4px 14px -6px rgba(74,56,24,0.18)}
+.dd__opt.is-sel{font-weight:500}
+.dd__check{flex:none;fill:none;stroke:#9A7B45;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s ease}
+.dd__opt.is-sel .dd__check{opacity:1}
+@keyframes ddIn{from{opacity:0;transform:translate3d(0,-8px,0) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.dd__panel{animation:none}.dd__chev{transition:none}}
+</style>
+</helmet>
+
+<sc-if value="{{ loaderOn }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:9998;background:#F8F5F0;display:flex;flex-direction:column;justify-content:space-between;padding:24px var(--gutter);transition:transform 1s cubic-bezier(.76,0,.24,1);transform:translateY({{ loaderY }})">
+    <div style="display:flex;justify-content:space-between;font-size:16px;color:#888880;animation:fadeIn .6s ease .2s both"><span>Tamil Nadu, India</span><span>Est. 2010</span></div>
+    <div style="position:absolute;left:50%;top:50%;width:clamp(170px,24vw,320px);aspect-ratio:928/697;transform:translate(-50%,-50%)">
+      <div data-loader-anim="" style="position:absolute;inset:0;animation:logoSettle 1.7s cubic-bezier(.22,1,.36,1) both">
+        <!-- blueprint ghost, then the logo "built" from the ground up behind a rising gold level line -->
+        <img src="assets/ar-logo.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.1">
+        <img data-loader-anim="" src="assets/ar-logo.png" alt="AR Builder" style="position:absolute;inset:0;width:100%;height:100%;animation:logoBuild 1.25s cubic-bezier(.65,0,.35,1) .2s both">
+        <span data-loader-anim="" aria-hidden="true" style="position:absolute;left:-6%;right:-6%;height:1.5px;background:#C8A96E;box-shadow:0 0 12px rgba(200,169,110,0.8);animation:levelRise 1.25s cubic-bezier(.65,0,.35,1) .2s both"></span>
+      </div>
+      <span data-loader-anim="" aria-hidden="true" style="position:absolute;left:-22px;top:-22px;width:16px;height:16px;border-left:1.5px solid #0A0A0A;border-top:1.5px solid #0A0A0A;animation:cornerIn .7s cubic-bezier(.22,1,.36,1) .05s both"></span>
+      <span data-loader-anim="" aria-hidden="true" style="position:absolute;right:-22px;top:-22px;width:16px;height:16px;border-right:1.5px solid #0A0A0A;border-top:1.5px solid #0A0A0A;animation:cornerIn .7s cubic-bezier(.22,1,.36,1) .12s both"></span>
+      <span data-loader-anim="" aria-hidden="true" style="position:absolute;left:-22px;bottom:-22px;width:16px;height:16px;border-left:1.5px solid #0A0A0A;border-bottom:1.5px solid #0A0A0A;animation:cornerIn .7s cubic-bezier(.22,1,.36,1) .19s both"></span>
+      <span data-loader-anim="" aria-hidden="true" style="position:absolute;right:-22px;bottom:-22px;width:16px;height:16px;border-right:1.5px solid #0A0A0A;border-bottom:1.5px solid #0A0A0A;animation:cornerIn .7s cubic-bezier(.22,1,.36,1) .26s both"></span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="position:relative;height:1px;background:rgba(10,10,10,0.12)"><div style="position:absolute;left:0;top:0;height:1px;background:#0A0A0A;animation:growLine 1.6s cubic-bezier(.65,0,.35,1) .2s both"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:16px;color:#888880"><span>Building excellence</span><span>Architecture · Construction · Interiors</span></div>
+    </div>
+  </div>
+</sc-if>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s cubic-bezier(.44,0,.56,1),border-color .4s cubic-bezier(.44,0,.56,1);background:{{ navBg }};backdrop-filter:{{ navBlur }};-webkit-backdrop-filter:{{ navBlur }};border-bottom:1px solid {{ navLine }}">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,1.4vw,20px) var(--gutter)">
+    <div style="display:flex;align-items:center;gap:88px">
+      <a href="#" onClick="{{ nav.home }}" data-cursor-text="" aria-label="AR Builder home" style="display:block;line-height:0"><img src="assets/ar-logo.png" alt="AR Builder" style="display:block;height:clamp(36px,3.4vw,44px);width:auto;filter:{{ navLogoFilter }};transition:filter .4s cubic-bezier(.44,0,.56,1)"></a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;gap:32px">
+          <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="4">
+            <a href="#" onClick="{{ l.go }}" data-cursor-text="" style="display:block;height:20px;overflow:hidden;font-family:Switzer,sans-serif;font-size:18px;line-height:20px;letter-spacing:-0.04em;color:{{ navFg }};text-shadow:{{ navShadow }};transition:color .4s cubic-bezier(.44,0,.56,1)">
+              <span style="display:flex;flex-direction:column;transition:transform .55s cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-20px)"><span>{{ l.label }}</span><span style="color:{{ navFgDim }}">{{ l.label }}</span></span>
+            </a>
+          </sc-for>
+        </nav>
+      </sc-if>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px">
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:10px 20px;border-radius:50px;background:{{ ctaBg }};color:{{ ctaFg }};font-size:16px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E;color:#0A0A0A">Start a project</a>
+      </sc-if>
+      <button onClick="{{ openMenu }}" aria-label="Open menu" data-cursor-hover="" style="width:36px;height:36px;padding:0;border:0;background:transparent;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px">
+        <span style="display:block;width:20px;height:1.5px;border-radius:2px;background:{{ navFg }};box-shadow:{{ navShadow }};transition:background .4s"></span>
+        <span style="display:block;width:14px;height:1.5px;border-radius:2px;background:{{ navFg }};box-shadow:{{ navShadow }};transition:background .4s"></span>
+        <span style="display:block;width:18px;height:1.5px;border-radius:2px;background:{{ navFg }};box-shadow:{{ navShadow }};transition:background .4s"></span>
+      </button>
+    </div>
+  </div>
+  <div ref="{{ progressRef }}" style="position:absolute;bottom:0;left:0;width:100%;height:1px;background:#C8A96E;transform-origin:left;transform:scaleX(0)"></div>
+</header>
+
+<sc-if value="{{ menuShown }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Menu" style="position:fixed;inset:0;z-index:200;background:#EDE3D3;display:flex;flex-direction:column;padding:24px var(--gutter);animation:{{ menuAnim }};will-change:transform;backface-visibility:hidden;contain:layout paint">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <img src="assets/ar-logo.png" alt="AR Builder" style="display:block;height:clamp(36px,3.4vw,44px);width:auto">
+      <button onClick="{{ closeMenu }}" aria-label="Close menu" data-cursor-hover="" style="position:relative;width:48px;height:48px;border:0;border-radius:50%;background:#0A0A0A;transition:background .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E">
+        <span style="position:absolute;left:15px;top:23px;width:18px;height:1.5px;background:#fff;transform:rotate(45deg)"></span>
+        <span style="position:absolute;left:15px;top:23px;width:18px;height:1.5px;background:#fff;transform:rotate(-45deg)"></span>
+      </button>
+    </div>
+    <div style="flex:1;min-height:0;display:flex;gap:clamp(24px,4vw,64px);padding:24px 0">
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,3.4vw,48px)">
+    <nav style="display:flex;flex-direction:column;align-items:flex-start;gap:4px">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="4">
+        <div style="overflow:hidden">
+          <a href="#" onClick="{{ l.go }}" aria-label="{{ l.label }}" data-cursor-text="" class="flip" style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(52px,9vw,140px);letter-spacing:-0.05em;line-height:1.04;color:#0A0A0A;animation:lineUp 1s cubic-bezier(.22,1,.36,1) both;animation-delay:{{ l.delay }}"><span class="flip__row"><sc-for list="{{ l.chars }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ l.chars }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+        </div>
+      </sc-for>
+    </nav>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;animation:lineUp 1s cubic-bezier(.22,1,.36,1) .5s both">
+      <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding:14px 30px;border-radius:50px;background:#0A0A0A;color:#fff;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .35s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E;color:#0A0A0A;gap:16px">Let's Build
+        <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <a href="https://www.instagram.com/a.r.builder/" target="_blank" rel="noopener" aria-label="Instagram" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#FFFFFF;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6"></circle></svg></a>
+          <a href="tel:+918667866915" aria-label="Call us" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#FFFFFF;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+          <a href="mailto:arbuilderenquiries@gmail.com" aria-label="Email us" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#FFFFFF;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg></a>
+          <a href="https://wa.me/918667866915" target="_blank" rel="noopener" aria-label="WhatsApp" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#FFFFFF;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path></svg></a>
+      </div>
+    </div>
+    </div>
+    <sc-if value="{{ menuImg }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:0 0 clamp(260px,32vw,520px);overflow:hidden;border-radius:20px;animation:lineUp 1.1s cubic-bezier(.22,1,.36,1) .35s both">
+        <img src="assets/menu-living.jpg" alt="Open living room with floor-to-ceiling glass facing desert mountains" style="display:block;width:100%;height:100%;object-fit:cover">
+      </div>
+    </sc-if>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-top:20px;border-top:1px solid rgba(10,10,10,0.14);font-size:16px;color:#888880">
+      <span>Triplicane, Chennai – 600 005</span>
+      <a href="tel:+918667866915" style="color:#0A0A0A;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s,color .4s" style-hover="text-decoration-color:#0A0A0A;color:#9A7B45">+91 86678 66915</a>
+      <a href="mailto:arbuilderenquiries@gmail.com" style="color:#0A0A0A;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s,color .4s" style-hover="text-decoration-color:#0A0A0A;color:#9A7B45">arbuilderenquiries@gmail.com</a>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Home">
+
+  <section ref="{{ heroRef }}" data-screen-label="Hero" style="position:relative;height:{{ heroH }};background:#0A0A0A">
+    <div style="position:sticky;top:0;width:100%;height:100vh;height:100svh;overflow:hidden">
+      <canvas ref="{{ heroCanvasRef }}" role="img" aria-label="A classical white mansion assembles itself, piece by piece, in a formal garden" style="display:block;width:100%;height:100%"></canvas>
+      <div ref="{{ heroCueRef }}" aria-hidden="true" style="position:absolute;left:50%;bottom:clamp(20px,3.6vh,36px);display:flex;align-items:center;gap:10px;height:40px;padding:0 16px 0 12px;border-radius:50px;background:rgba(10,10,10,0.5);color:#FFFFFF;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;line-height:1;pointer-events:none;transform:translateX(-50%);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+        <span style="position:relative;width:16px;height:24px;border:1.5px solid rgba(255,255,255,0.9);border-radius:10px;flex:none">
+          <span data-hero-dot="" style="position:absolute;left:50%;top:5px;width:2px;height:5px;margin-left:-1px;border-radius:2px;background:#FFFFFF;animation:heroCue 1.8s cubic-bezier(.65,0,.35,1) infinite"></span>
+        </span>
+        <span>Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magic text: only the paragraph pins (centred), so the hero → text → gallery flow stays tight -->
+  <section ref="{{ introRef }}" id="intro" data-screen-label="Intro" style="position:relative;padding:clamp(48px,6vw,88px) var(--gutter) clamp(12px,2vw,28px)">
+    <div data-intro-pin="" style="position:sticky;top:{{ introPinTop }};display:flex;justify-content:center">
+      <p aria-label="{{ introText }}" style="margin:0;max-width:1120px;text-align:center;font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(24px,2.9vw,46px);line-height:1.16;letter-spacing:-0.045em;color:#0A0A0A;text-wrap:balance"><sc-for list="{{ introWords }}" as="w" hint-placeholder-count="40"><span data-word="" aria-hidden="true" style="opacity:{{ introWordO }};transition:opacity .25s linear">{{ w.t }}</span></sc-for></p>
+    </div>
+    <div aria-hidden="true" style="height:{{ introSpacer }}"></div>
+  </section>
+
+  <section id="gallery" data-screen-label="Gallery" style="padding:0 0 clamp(24px,3vw,48px)">
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <!-- Phones: plain swipeable strip instead of the 3D carousel -->
+      <div class="ar-strip" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px var(--gutter) 4px;scroll-padding:0 5vw;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain">
+        <sc-for list="{{ stripItems }}" as="it" hint-placeholder-count="7">
+          <figure style="margin:0;flex:0 0 76vw;max-width:340px;scroll-snap-align:start">
+            <img src="{{ it.src }}" alt="{{ it.alt }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;background:#EDE3D3">
+            <figcaption style="display:flex;justify-content:space-between;margin-top:10px;font-size:14px;font-weight:500;color:#0A0A0A"><span>{{ it.title }}</span><span style="color:#888880">{{ it.num }}</span></figcaption>
+          </figure>
+        </sc-for>
+      </div>
+      <div aria-hidden="true" style="opacity:{{ swipeO }};transform:translateY({{ swipeY }});display:flex;justify-content:center;margin-top:16px;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)">
+        <span style="display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 16px;border-radius:50px;border:1px solid rgba(10,10,10,0.14);color:#4A4A44;font-size:13px;font-weight:500;letter-spacing:0.02em;line-height:1">
+          <svg data-swipe-l="" width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:swipeL 1.6s cubic-bezier(.65,0,.35,1) infinite"><path d="M10 3 5 8l5 5"></path></svg>
+          <span>Swipe left or right</span>
+          <svg data-swipe-r="" width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:swipeR 1.6s cubic-bezier(.65,0,.35,1) infinite"><path d="m6 3 5 5-5 5"></path></svg>
+        </span>
+      </div>
+    </sc-if>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative;width:100%;height:clamp(440px,52vw,640px);color:#0A0A0A">
+      <x-import component="FlexCarousel" from="./FlexCarousel.jsx" dc-props="{{ carousel }}" style="position:absolute;inset:0" hint-size="100%,100%"></x-import>
+      <div aria-hidden="true" style="opacity:{{ swipeO }};transform:translateY({{ swipeY }});position:absolute;left:0;right:0;top:calc(75% + 74px);display:flex;justify-content:center;pointer-events:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)">
+        <span style="display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 16px;border-radius:50px;border:1px solid rgba(10,10,10,0.14);color:#4A4A44;font-size:13px;font-weight:500;letter-spacing:0.02em;line-height:1">
+          <svg data-swipe-l="" width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:swipeL 1.6s cubic-bezier(.65,0,.35,1) infinite"><path d="M10 3 5 8l5 5"></path></svg>
+          <span>Swipe left or right</span>
+          <svg data-swipe-r="" width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:swipeR 1.6s cubic-bezier(.65,0,.35,1) infinite"><path d="m6 3 5 5-5 5"></path></svg>
+        </span>
+      </div>
+    </div>
+    </sc-if>
+  </section>
+
+  <!-- 3D scroll video (16:9) goes here -->
+
+  <section id="about" data-screen-label="About" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(24px,3vw,48px)">
+    <div style="display:flex;flex-wrap:wrap;gap:40px 20px">
+      <div data-reveal="" style="flex:2 1 180px;display:flex;align-items:center;gap:10px;align-self:flex-start">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Who we are</span>
+      </div>
+      <div style="flex:6 1 440px;display:flex;flex-direction:column;gap:32px">
+        <h2 data-reveal="" style="font-size:clamp(30px,3.4vw,52px);text-wrap:balance">Architecture is the art of how to waste space, <span style="color:#888880">wisely.</span></h2>
+        <div data-reveal="" data-delay="0.1" style="display:flex;flex-direction:column;gap:20px;max-width:560px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">
+          <p>Founded with a vision to redefine construction standards in Chennai, AR Builder was established by its founder, M. Lawrence, and has spent over a decade perfecting the art of building. Every structure we create is a testament to our commitment to quality, precision, and the timeless pursuit of excellence.</p>
+          <p>We don't just construct buildings. We craft legacies. From the foundation to the final finishing, every detail is handled with the same care and expertise that has made us Chennai's most trusted builder.</p>
+        </div>
+        <a href="#" onClick="{{ nav.projects }}" data-reveal="" data-delay="0.2" data-cursor-text="" style="display:inline-flex;align-items:center;gap:8px;width:fit-content;font-size:18px;font-weight:500;color:#0A0A0A;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s cubic-bezier(.44,0,.56,1)" style-hover="text-decoration-color:#0A0A0A">Our story
+          <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+        </a>
+      </div>
+      <div style="flex:4 1 300px">
+        <div data-reveal="clip" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC">
+          <div data-parallax="8" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+            <video src="assets/dream-home.mp4" poster="assets/posters/dream-home.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Hero" style="padding:clamp(24px,3vw,48px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div data-reveal="" data-delay="0.1" style="display:flex;align-items:center;gap:10px;margin-bottom:clamp(24px,2.5vw,36px)">
+      <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+      <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Architects &amp; builders · Est. 2010</span>
+    </div>
+    <h1 style="font-size:clamp(44px,7.6vw,180px);line-height:1.02;letter-spacing:-0.05em">
+      <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.15" style="display:block">Crafted with precision.</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.28" style="display:block;color:#888880">Built to last.</span></span>
+    </h1>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px;margin-top:clamp(28px,3.4vw,48px)">
+      <p data-reveal="" data-delay="0.4" style="max-width:520px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;text-wrap:pretty">AR Builder brings together architectural vision and engineering excellence to create homes, schools and spaces across Tamil Nadu that are built to stand for generations.</p>
+      <div data-reveal="" data-delay="0.5" style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#" onClick="{{ nav.projects }}" data-cursor-hover="" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:14px 28px;border-radius:50px;background:#0A0A0A;color:#fff;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E;color:#0A0A0A">See our work
+          <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+        </a>
+        <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" style="display:inline-flex;align-items:center;height:48px;padding:14px 28px;border-radius:50px;box-shadow:inset 0 0 0 1px rgba(10,10,10,0.2);color:#0A0A0A;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff">Get in touch</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:20px;margin-top:clamp(40px,5vw,72px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none">
+      <div data-reveal="clip" data-delay="0.35" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC;scroll-snap-align:start">
+          <div data-parallax="6" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+            <video src="assets/poes-1.mp4" poster="assets/posters/poes-1.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          </div>
+          <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#C8A96E"></span>Poes Garden · In progress</span>
+        </div>
+        <div data-reveal="clip" data-delay="0.47" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC;scroll-snap-align:start">
+          <div data-parallax="6" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+            <img src="assets/kavi-b.jpg" alt="Kavi Illam, completed residence" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+          <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#0A0A0A"></span>Kavi Illam · Completed</span>
+        </div>
+        <div data-reveal="clip" data-delay="0.59" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC;scroll-snap-align:start">
+          <div data-parallax="6" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+            <img src="assets/school-a.jpg" alt="Montfort Academy entrance, Mylapore" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+          <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#0A0A0A"></span>Montfort Academy · Completed</span>
+        </div>
+    </div>
+  </section>
+
+  <div style="overflow:hidden;border-top:1px solid rgba(10,10,10,0.12);border-bottom:1px solid rgba(10,10,10,0.12);padding:clamp(20px,2.4vw,32px) 0">
+    <div style="display:flex;width:max-content;animation:marquee 50s linear infinite">
+      <div style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)">
+        <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="6">
+          <span style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(28px,3.4vw,52px);letter-spacing:-0.04em;line-height:1.1;white-space:nowrap">{{ m.t }}</span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)">
+        <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="6">
+          <span style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(28px,3.4vw,52px);letter-spacing:-0.04em;line-height:1.1;white-space:nowrap">{{ m.t }}</span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+
+
+  <section id="services" data-screen-label="Services" style="padding:clamp(40px,5.6vw,80px) var(--gutter)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(40px,4.4vw,64px)">
+      <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">What we do</span>
+      </div>
+      <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);max-width:20ch;text-wrap:balance">Every structure tells a story <span style="color:#888880">of excellence.</span></h2>
+    </div>
+    <div class="svc-list" style="position:relative;border-bottom:1px solid rgba(10,10,10,0.18)">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="7">
+        <div data-reveal="" data-delay="{{ s.delay }}" data-svc-i="{{ s.idx }}" style="border-top:1px solid rgba(10,10,10,0.18)">
+          <div class="svc-row" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:clamp(20px,2.2vw,32px) 0;transition:padding .6s cubic-bezier(.22,1,.36,1)" style-hover="padding-left:20px">
+            <span style="flex:0 0 64px;font-size:18px;font-weight:500;line-height:1.2;color:#888880">{{ s.num }}</span>
+            <h3 style="flex:1 1 280px;font-size:clamp(26px,2.8vw,40px)">{{ s.title }}</h3>
+            <p style="flex:1 1 320px;max-width:460px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;text-wrap:pretty">{{ s.desc }}</p>
+            <span class="svc-arrow" style="width:40px;height:40px;flex:none;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:#0A0A0A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"></path></svg></span>
+          </div>
+          <div class="svc-media" aria-hidden="true"><div class="svc-media__clip"><div class="svc-media__frame">
+            <div class="svc-media__photo"><div class="svc-media__img" data-i="{{ s.idx }}"></div></div>
+          </div></div></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="work" data-screen-label="Our work" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px;margin-bottom:clamp(48px,6vw,96px)">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Our work</span>
+      </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);text-wrap:balance">32+ projects across <span style="color:#888880">Tamil Nadu.</span></h2>
+      </div>
+      <p data-reveal="" data-delay="0.16" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;max-width:380px;text-wrap:pretty">Since 2010 we've built homes, schools and spaces across the state, including completed work, projects in progress, and the ones we hold closest.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(72px,9vw,144px)">
+      <article style="display:flex;flex-direction:column;gap:clamp(24px,3vw,40px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px">
+          <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;max-width:820px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#0A0A0A"></span>Completed</span><span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#C8A96E"></span>Education</span></div>
+            <h3 style="font-size:clamp(28px,3.6vw,56px);text-wrap:balance">Montfort Academy Higher Secondary School</h3>
+            <span style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">Mylapore, Chennai</span>
+          </div>
+          <p data-reveal="" data-delay="0.1" style="max-width:380px;font-family:Switzer,sans-serif;font-size:clamp(19px,1.6vw,24px);line-height:1.32;letter-spacing:-0.02em;text-wrap:pretty">“Some projects are more than just projects. <span style="color:#888880">This one was home.”</span></p>
+        </div>
+        <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none">
+          <sc-for list="{{ montfortShots }}" as="m" hint-placeholder-count="3">
+            <div data-reveal="clip" data-delay="{{ m.delay }}" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC;scroll-snap-align:start">
+              <img src="{{ m.src }}" alt="{{ m.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.04)">
+            </div>
+          </sc-for>
+        </div>
+      </article>
+      <div style="display:flex;flex-wrap:wrap;gap:56px 20px">
+        <a href="#" onClick="{{ nav.beforeAfter }}" data-cursor-hover="" style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:20px;color:#0A0A0A">
+          <div data-reveal="clip" data-delay="0" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC">
+            <div style="position:absolute;inset:0;transition:transform 1.2s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.04)">
+              <img src="assets/kavi-b.jpg" alt="Kavi Illam, completed residence" loading="lazy" onError="{{ mediaErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            </div>
+            <span style="position:absolute;top:16px;left:16px"><span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#0A0A0A"></span>Completed · Residence</span></span>
+          </div>
+          <div data-reveal="" data-delay="0.15" style="display:flex;flex-direction:column;gap:12px">
+            <h3 style="font-size:clamp(24px,2.4vw,36px)">Kavi Illam</h3>
+            <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;max-width:480px;text-wrap:pretty">A family residence, built for a close friend who placed their trust in us at every step.</p>
+            <span style="display:inline-flex;align-items:center;gap:8px;width:fit-content;font-size:18px;font-weight:500;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s cubic-bezier(.44,0,.56,1);color:#0A0A0A" style-hover="text-decoration-color:#0A0A0A">See before &amp; after <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></span>
+          </div>
+        </a>
+        <a href="#" onClick="{{ nav.onSite }}" data-cursor-hover="" style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:20px;color:#0A0A0A">
+          <div data-reveal="clip" data-delay="0.12" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC">
+            <div style="position:absolute;inset:0;transition:transform 1.2s cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.04)">
+              <video src="assets/poes-1.mp4" poster="assets/posters/poes-1.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+            </div>
+            <span style="position:absolute;top:16px;left:16px"><span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:50px;background:#fff;font-size:14px;font-weight:500;line-height:1;color:#0A0A0A"><span style="width:8px;height:8px;border-radius:50%;background:#C8A96E"></span>In progress · Residence</span></span>
+          </div>
+          <div data-reveal="" data-delay="0.27" style="display:flex;flex-direction:column;gap:12px">
+            <h3 style="font-size:clamp(24px,2.4vw,36px)">Poes Garden Residence</h3>
+            <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;max-width:480px;text-wrap:pretty">A luxurious three-floor residence in the heart of Poes Garden, rising floor by floor.</p>
+            <span style="display:inline-flex;align-items:center;gap:8px;width:fit-content;font-size:18px;font-weight:500;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s cubic-bezier(.44,0,.56,1);color:#0A0A0A" style-hover="text-decoration-color:#0A0A0A">Watch it on site <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></span>
+          </div>
+        </a>
+      </div>
+      <div data-reveal="" style="position:relative;overflow:hidden;border-radius:20px;background:#0A0A0A;color:#fff;min-height:clamp(300px,28vw,420px);padding:clamp(24px,4vw,56px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px">
+        <x-import component-from-global-scope="particle-bg" from="./ar-effects.js" style="position:absolute;inset:0;pointer-events:none" hint-size="100%,100%"></x-import>
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:20px;max-width:720px">
+          <div style="display:flex"><span style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:50px;background:rgba(255,255,255,0.1);font-size:14px;font-weight:500;line-height:1;color:#FFFFFF"><span style="width:8px;height:8px;border-radius:50%;background:#C8A96E"></span>Ongoing · Education</span></div>
+          <h3 style="font-size:clamp(32px,4.45vw,64px);color:#fff;text-wrap:balance">Montfort School, <span style="color:#888880">Yercaud.</span></h3>
+          <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.7);max-width:460px;text-wrap:pretty">Our next Montfort campus, now under construction in the Shevaroy Hills.</p>
+        </div>
+        <span style="position:relative;z-index:1;font-size:16px;color:rgba(255,255,255,0.6)">Yercaud, Tamil Nadu</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="before-after" data-screen-label="Before &amp; after" style="background:#0A0A0A;color:#fff;padding:clamp(56px,8vw,128px) var(--gutter)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,96px)">
+      <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:24px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Before &amp; after</span>
+      </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);color:#fff;text-wrap:balance">From bare frame <span style="color:#888880">to Kavi Illam.</span></h2>
+        <p data-reveal="" data-delay="0.16" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.7);max-width:440px;text-wrap:pretty">The same plot and the same view, from exposed columns and brickwork to the finished family home.</p>
+        <div data-reveal="" data-delay="0.24" style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ baViews }}" as="v" hint-placeholder-count="2">
+            <button onClick="{{ v.pick }}" data-cursor-hover="" style="height:44px;padding:12px 22px;border:0;border-radius:50px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25);font-family:Inter,sans-serif;font-size:16px;font-weight:500;letter-spacing:-0.02em;line-height:1.2;transition:all .3s cubic-bezier(.44,0,.56,1);background:{{ v.bg }};color:{{ v.fg }}">{{ v.label }}</button>
+          </sc-for>
+        </div>
+        <span data-reveal="" data-delay="0.3" style="font-size:16px;color:rgba(255,255,255,0.55)">Drag the handle to compare</span>
+      </div>
+      <div style="flex:1 1 380px;max-width:600px;margin:0 auto;width:100%">
+        <div ref="{{ baRef }}" onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" onPointerCancel="{{ baUp }}" data-reveal="clip" data-cursor-hover="" style="position:relative;aspect-ratio:1092/1439;border-radius:20px;overflow:hidden;background:#151515;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize">
+          <img src="assets/kavi-c.jpg" alt="After: Kavi Illam completed, front" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:opacity .6s ease;opacity:{{ baO0 }}">
+          <img src="assets/kavi-b.jpg" alt="After: Kavi Illam completed, corner" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:opacity .6s ease;opacity:{{ baO1 }}">
+          <img src="assets/kavi-a.jpg" alt="Before: Kavi Illam under construction, front" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;clip-path:inset(0 {{ baClip }} 0 0);transition:{{ baT }};opacity:{{ baO0 }}">
+          <img src="assets/kavi-d.jpg" alt="Before: Kavi Illam under construction, corner" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;clip-path:inset(0 {{ baClip }} 0 0);transition:{{ baT }};opacity:{{ baO1 }}">
+          <div style="position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:#fff;pointer-events:none;left:{{ baPos }};transition:{{ baLineT }}">
+            <span style="position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;gap:4px"><svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M10 4L6 8l4 4"></path></svg><svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M6 4l4 4-4 4"></path></svg></span>
+          </div>
+          <span style="position:absolute;top:16px;left:16px;padding:9px 14px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:14px;font-weight:500;line-height:1;pointer-events:none">Before</span>
+          <span style="position:absolute;top:16px;right:16px;padding:9px 14px;border-radius:50px;background:#fff;color:#0A0A0A;font-size:14px;font-weight:500;line-height:1;pointer-events:none">After</span>
+        </div>
+      </div>
+    </div>
+    <div id="on-site" style="margin-top:clamp(88px,11vw,176px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px;margin-bottom:clamp(40px,4.4vw,64px)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">On site, right now</span>
+      </div>
+          <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);color:#fff;max-width:18ch;text-wrap:balance">Every beam, brick and board <span style="color:#888880">is a step closer.</span></h2>
+        </div>
+        <p data-reveal="" data-delay="0.16" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.7);max-width:380px;text-wrap:pretty">Unedited moments from our live sites, including the Poes Garden residence.</p>
+      </div>
+      <div class="reels">
+        <div data-reveal="" data-delay="0.00" style="display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <div style="position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#151515">
+              <video src="assets/poes-2.mp4" poster="assets/posters/poes-2.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:13px;font-weight:500;line-height:1"><span style="width:7px;height:7px;border-radius:50%;background:#C8A96E"></span>In progress</span>
+            </div>
+            <span style="font-size:16px;color:rgba(255,255,255,0.75)">Poes Garden · Brickwork</span>
+          </div>
+          <div data-reveal="" data-delay="0.08" style="display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <div style="position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#151515">
+              <video src="assets/poes-3.mp4" poster="assets/posters/poes-3.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:13px;font-weight:500;line-height:1"><span style="width:7px;height:7px;border-radius:50%;background:#C8A96E"></span>In progress</span>
+            </div>
+            <span style="font-size:16px;color:rgba(255,255,255,0.75)">Poes Garden · Upper floor</span>
+          </div>
+          <div data-reveal="" data-delay="0.16" style="display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <div style="position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#151515">
+              <video src="assets/poes-4.mp4" poster="assets/posters/poes-4.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:13px;font-weight:500;line-height:1"><span style="width:7px;height:7px;border-radius:50%;background:#C8A96E"></span>In progress</span>
+            </div>
+            <span style="font-size:16px;color:rgba(255,255,255,0.75)">Poes Garden · Terrace level</span>
+          </div>
+          <div data-reveal="" data-delay="0.24" style="display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <div style="position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#151515">
+              <video src="assets/wip.mp4" poster="assets/posters/wip.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:13px;font-weight:500;line-height:1"><span style="width:7px;height:7px;border-radius:50%;background:#C8A96E"></span>In progress</span>
+            </div>
+            <span style="font-size:16px;color:rgba(255,255,255,0.75)">On site · Work in progress</span>
+          </div>
+          <div data-reveal="" data-delay="0.32" style="display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <div style="position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#151515">
+              <video src="assets/dream-home.mp4" poster="assets/posters/dream-home.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              <span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:50px;background:rgba(10,10,10,0.6);color:#fff;font-size:13px;font-weight:500;line-height:1"><span style="width:7px;height:7px;border-radius:50%;background:#C8A96E"></span>In progress</span>
+            </div>
+            <span style="font-size:16px;color:rgba(255,255,255,0.75)">On site · Craftsmanship</span>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Process" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(48px,6vw,112px)">
+      <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Our process</span>
+      </div>
+      <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);max-width:20ch;text-wrap:balance">From vision to reality, <span style="color:#888880">every step perfected.</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:40px">
+      <sc-for list="{{ processSteps }}" as="p" hint-placeholder-count="4">
+        <div data-reveal="" data-delay="{{ p.delay }}" style="display:flex;flex-direction:column;gap:20px">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">{{ p.num }}</span>
+          <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+          <h3 style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">{{ p.title }}</h3>
+          <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;max-width:300px;text-wrap:pretty">{{ p.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="Numbers" style="position:relative;overflow:hidden;background:#0A0A0A;color:#fff;padding:clamp(56px,8vw,128px) var(--gutter)">
+    <x-import component-from-global-scope="particle-bg" from="./ar-effects.js" style="position:absolute;inset:0;pointer-events:none" hint-size="100%,100%"></x-import>
+    <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:56px 20px">
+      <div style="flex:5 1 360px;display:flex;flex-direction:column;gap:20px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">By the numbers</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);color:#fff;text-wrap:balance">Numbers that speak <span style="color:#888880">for themselves.</span></h2>
+        <p data-reveal="" data-delay="0.16" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.65);max-width:380px">Sixteen years of building trust, one project at a time.</p>
+      </div>
+      <div style="flex:7 1 440px;align-self:flex-end;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:48px 20px">
+        <sc-for list="{{ impactStats }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="" data-delay="{{ s.delay }}" data-count="{{ s.key }}" style="display:flex;flex-direction:column;gap:20px">
+            <div style="height:1px;background:rgba(255,255,255,0.18)"></div>
+            <div style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(52px,6.4vw,112px);letter-spacing:-0.05em;line-height:1;color:#fff">{{ s.num }}<span style="color:#C8A96E">{{ s.suffix }}</span></div>
+            <span style="font-size:18px;font-weight:500;color:rgba(255,255,255,0.65)">{{ s.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Testimonials" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(40px,4.4vw,64px)">
+      <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Client voices</span>
+      </div>
+      <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);text-wrap:balance">What our clients <span style="color:#888880">say.</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+      <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+        <div data-reveal="" data-delay="{{ t.delay }}" style="display:flex">
+          <div style="width:100%;min-height:clamp(320px,26vw,400px);display:flex;flex-direction:column;justify-content:space-between;gap:40px;padding:clamp(20px,2.2vw,32px);border-radius:20px;background:#fff">
+            <p style="font-family:Switzer,sans-serif;font-size:clamp(19px,1.6vw,24px);line-height:1.32;letter-spacing:-0.02em;text-wrap:pretty">“{{ t.quote }}”</p>
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="height:1px;background:rgba(10,10,10,0.12)"></div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:18px;font-weight:500;line-height:1.2">{{ t.name }}</span>
+                <span style="font-size:16px;color:#4A4A44">{{ t.detail }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="padding:clamp(20px,3vw,40px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div data-reveal="clip" style="position:relative;overflow:hidden;border-radius:20px;background:#0A0A0A;min-height:clamp(500px,48vw,760px);display:flex;align-items:flex-end;padding:clamp(24px,4vw,64px)">
+      <div data-parallax="8" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+        <img src="assets/kavi-c.jpg" alt="Kavi Illam, completed" onError="{{ mediaErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%">
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.35) 100%)"></div>
+      <x-import component-from-global-scope="particle-bg" from="./ar-effects.js" style="position:absolute;inset:0;pointer-events:none" hint-size="100%,100%"></x-import>
+      <div style="position:relative;z-index:1;width:100%;display:flex;flex-direction:column;gap:32px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:rgba(255,255,255,0.75)">Let's build together</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(40px,6.2vw,104px);line-height:1.02;letter-spacing:-0.05em;color:#fff;max-width:16ch;text-wrap:balance">Your vision. Our craft. <span style="color:rgba(255,255,255,0.55)">One exceptional result.</span></h2>
+        <div data-reveal="" data-delay="0.16" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+          <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.75);max-width:440px">Ready to start your project? Our team is here to guide you from the first sketch to the final key.</p>
+          <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:14px 28px;border-radius:50px;background:#fff;color:#0A0A0A;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E;color:#0A0A0A">Start a conversation
+            <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Contact" style="position:relative;isolation:isolate">
+  <!-- Animated "Waves" shader background: viewport-sized canvas pinned behind the whole page, fading into the footer -->
+  <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(to top,#E2D2B8,#EBDFCB 35%,#F2EADD 70%,#F8F5F0);-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 240px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 240px),transparent)">
+    <div style="position:sticky;top:0;height:100vh">
+      <x-import component-from-global-scope="waves-bg" from="./waves-bg.js" style="position:absolute;inset:0" hint-size="100%,100%"></x-import>
+    </div>
+  </div>
+  <section style="padding:clamp(120px,12vw,168px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <h1 style="font-size:clamp(64px,12.1vw,260px);line-height:1;letter-spacing:-0.05em">
+      <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.1" style="display:block">Get in touch</span></span>
+    </h1>
+    <a class="contact-email" href="mailto:arbuilderenquiries@gmail.com" data-reveal="" data-delay="0.25" data-cursor-text="" style="display:inline-block;margin-top:8px;font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(32px,4.45vw,64px);letter-spacing:-0.04em;line-height:1.12;color:#0A0A0A;opacity:0.66;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:6px;text-decoration-thickness:2px;overflow-wrap:anywhere;transition:text-decoration-color .4s cubic-bezier(.44,0,.56,1),opacity .4s cubic-bezier(.44,0,.56,1)" style-hover="text-decoration-color:#0A0A0A;opacity:1">arbuilderenquiries@gmail.com</a>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px 40px;margin-top:clamp(48px,6vw,96px)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px">
+        <a href="tel:+918667866915" style="font-size:18px;font-weight:500;line-height:1.2;color:#0A0A0A">+91 86678 66915</a>
+        <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+        <h4 style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">Head office</h4>
+        <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">Triplicane, Chennai – 600 005</p>
+      </div>
+      <div data-reveal="" data-delay="0.08" style="display:flex;flex-direction:column;gap:20px">
+        <a href="mailto:arbuilderenquiries@gmail.com" style="font-size:18px;font-weight:500;line-height:1.2;color:#0A0A0A">arbuilderenquiries@gmail.com</a>
+        <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+        <h4 style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">Enquiries</h4>
+        <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">We get back to every enquiry within 24 hours.</p>
+      </div>
+      <div data-reveal="" data-delay="0.16" style="display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:18px;font-weight:500;line-height:1.2">Monday – Saturday</span>
+        <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+        <h4 style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">Office hours</h4>
+        <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">9AM to 7PM IST</p>
+      </div>
+      <div data-reveal="" data-delay="0.24" style="display:flex;flex-direction:column;gap:20px">
+        <a href="https://www.instagram.com/a.r.builder/" target="_blank" rel="noopener" style="font-size:18px;font-weight:500;line-height:1.2;color:#0A0A0A">@a.r.builder</a>
+        <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+        <h4 style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">Instagram</h4>
+        <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">Follow our sites as they take shape.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="height:1px;background:rgba(10,10,10,0.18);margin-bottom:clamp(32px,4vw,56px)"></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px;margin-bottom:clamp(32px,3.4vw,48px)">
+      <div data-reveal="" style="flex:2 1 180px;display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Write to us</span>
+      </div>
+      <h3 data-reveal="" data-delay="0.08" style="flex:10 1 360px;max-width:900px;font-size:clamp(26px,2.8vw,40px);text-wrap:balance">Have a project in mind? Tell us about it, <span style="color:#888880">and we'll find the best path to build it.</span></h3>
+    </div>
+    <form onSubmit="{{ submit }}" noValidate="" data-reveal="" data-delay="0.16" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(max(min(100%,260px),calc((100% - 40px) / 3)),1fr));gap:32px 20px">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <label style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">Your name</span>
+          <input type="text" placeholder="Rajesh Kumar" value="{{ form.name }}" onChange="{{ set.name }}" style="width:100%;border:0;border-bottom:1px solid rgba(10,10,10,0.3);outline:none;border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1)" style-focus="border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E">
+          <sc-if value="{{ errors.name }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.name }}</span></sc-if>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">Phone</span>
+          <input type="tel" inputMode="tel" maxLength="16" autoComplete="tel" placeholder="+919840000000" value="{{ form.phone }}" onChange="{{ set.phone }}" style="width:100%;border:0;border-bottom:1px solid rgba(10,10,10,0.3);outline:none;border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1)" style-focus="border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E">
+          <sc-if value="{{ errors.phone }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.phone }}</span></sc-if>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">Email</span>
+          <input type="email" placeholder="hello@site.com" value="{{ form.email }}" onChange="{{ set.email }}" style="width:100%;border:0;border-bottom:1px solid rgba(10,10,10,0.3);outline:none;border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1)" style-focus="border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E">
+          <sc-if value="{{ errors.email }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.email }}</span></sc-if>
+        </label>
+        <div data-dd="projectType" style="display:flex;flex-direction:column;gap:12px;min-width:0;position:relative;z-index:{{ dd.projectType.z }}">
+          <span id="dd-projectType-label" style="font-size:18px;font-weight:500;line-height:1.2">Project type</span>
+          <div class="{{ dd.projectType.cls }}">
+            <button type="button" class="dd__btn" aria-haspopup="listbox" aria-expanded="{{ dd.projectType.expanded }}" aria-labelledby="dd-projectType-label" aria-activedescendant="{{ dd.projectType.active }}" onClick="{{ dd.projectType.toggle }}" onKeyDown="{{ dd.projectType.key }}" data-cursor-hover="">
+              <span class="{{ dd.projectType.valCls }}">{{ dd.projectType.text }}</span>
+              <svg class="dd__chev" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"></path></svg>
+            </button>
+            <sc-if value="{{ dd.projectType.open }}" hint-placeholder-val="{{ false }}">
+              <ul class="dd__panel" role="listbox" aria-labelledby="dd-projectType-label" data-lenis-prevent="" onMouseDown="{{ dd.projectType.keepFocus }}">
+                <sc-for list="{{ dd.projectType.options }}" as="o">
+                  <li id="{{ o.id }}" role="option" aria-selected="{{ o.sel }}" class="{{ o.cls }}" onClick="{{ o.pick }}" onMouseEnter="{{ o.hover }}" data-cursor-hover=""><span>{{ o.label }}</span><svg class="dd__check" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"></path></svg></li>
+                </sc-for>
+              </ul>
+            </sc-if>
+          </div>
+          <sc-if value="{{ errors.projectType }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.projectType }}</span></sc-if>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">Project location</span>
+          <input type="text" placeholder="Area or town" value="{{ form.location }}" onChange="{{ set.location }}" style="width:100%;border:0;border-bottom:1px solid rgba(10,10,10,0.3);outline:none;border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1)" style-focus="border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E">
+          <sc-if value="{{ errors.location }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.location }}</span></sc-if>
+        </label>
+        <div data-dd="budget" style="display:flex;flex-direction:column;gap:12px;min-width:0;position:relative;z-index:{{ dd.budget.z }}">
+          <span id="dd-budget-label" style="font-size:18px;font-weight:500;line-height:1.2">Estimated budget <span style="color:#888880;font-weight:400">(optional)</span></span>
+          <div class="{{ dd.budget.cls }}">
+            <button type="button" class="dd__btn" aria-haspopup="listbox" aria-expanded="{{ dd.budget.expanded }}" aria-labelledby="dd-budget-label" aria-activedescendant="{{ dd.budget.active }}" onClick="{{ dd.budget.toggle }}" onKeyDown="{{ dd.budget.key }}" data-cursor-hover="">
+              <span class="{{ dd.budget.valCls }}">{{ dd.budget.text }}</span>
+              <svg class="dd__chev" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"></path></svg>
+            </button>
+            <sc-if value="{{ dd.budget.open }}" hint-placeholder-val="{{ false }}">
+              <ul class="dd__panel" role="listbox" aria-labelledby="dd-budget-label" data-lenis-prevent="" onMouseDown="{{ dd.budget.keepFocus }}">
+                <sc-for list="{{ dd.budget.options }}" as="o">
+                  <li id="{{ o.id }}" role="option" aria-selected="{{ o.sel }}" class="{{ o.cls }}" onClick="{{ o.pick }}" onMouseEnter="{{ o.hover }}" data-cursor-hover=""><span>{{ o.label }}</span><svg class="dd__check" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"></path></svg></li>
+                </sc-for>
+              </ul>
+            </sc-if>
+          </div>
+        </div>
+        <label style="grid-column:1/-1;display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:18px;font-weight:500;line-height:1.2">Project details</span>
+          <textarea placeholder="Tell us more about your idea" value="{{ form.message }}" onChange="{{ set.message }}" style="width:100%;border:0;border-bottom:1px solid rgba(10,10,10,0.3);outline:none;border-radius:0;background:transparent;padding:12px 0;font-family:Inter,sans-serif;font-size:16px;line-height:1.2;letter-spacing:normal;color:#0A0A0A;box-shadow:0 1px 0 0 transparent;transition:box-shadow .3s cubic-bezier(.44,0,.56,1),border-color .3s cubic-bezier(.44,0,.56,1);height:112px;resize:vertical" style-focus="border-bottom-color:#C8A96E;box-shadow:0 1px 0 0 #C8A96E"></textarea>
+          <sc-if value="{{ errors.message }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#dc2626">{{ errors.message }}</span></sc-if>
+        </label>
+        <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px">
+          <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#888880;text-wrap:pretty">By clicking Submit you agree to our <a href="#" onClick="{{ nav.privacy }}" style="color:#0A0A0A;text-decoration:underline;text-underline-offset:3px">Privacy Policy</a> &amp; <a href="#" onClick="{{ nav.terms }}" style="color:#0A0A0A;text-decoration:underline;text-underline-offset:3px">Terms</a></p>
+          <button type="submit" disabled="{{ sendDisabled }}" data-cursor-hover="" style="flex:0 1 280px;min-width:min(100%,220px);height:48px;padding:14px 28px;border:0;border-radius:50px;background:#0A0A0A;color:#fff;font-family:Inter,sans-serif;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1);opacity:{{ sendOpacity }}" style-hover="background:#C8A96E;color:#0A0A0A">{{ sendLabel }}</button>
+        </div>
+        <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}"><p style="grid-column:1/-1;font-size:16px">Thank you. We'll be in touch within 24 hours.</p></sc-if>
+        <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}"><p style="grid-column:1/-1;font-size:16px;color:#dc2626">Something went wrong. Please try again or call us directly.</p></sc-if>
+    </form>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="About">
+
+  <!-- Hero: full-bleed photo with slow zoom + parallax; headings sit at the bottom -->
+  <section ref="{{ aboutHeroRef }}" data-screen-label="About hero" style="position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0A0A0A;color:#fff">
+    <div data-parallax="10" style="position:absolute;left:0;right:0;top:-8%;height:116%">
+      <img src="assets/about-hero.webp" alt="Open-plan terrace with an infinity pool overlooking the sea at sunset" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 50%;animation:kenBurns 3.2s cubic-bezier(.22,1,.36,1) both">
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.74) 0%,rgba(10,10,10,0.3) 40%,rgba(10,10,10,0) 64%),linear-gradient(to bottom,rgba(10,10,10,0.28),rgba(10,10,10,0) 22%)"></div>
+    <div class="ah-content" style="position:absolute;left:0;right:0;bottom:0;padding:0 var(--gutter) clamp(28px,4.4vw,64px);display:flex;flex-direction:column;gap:clamp(18px,2vw,28px)">
+      <div data-reveal="" data-delay="0.1" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:rgba(255,255,255,0.82)">About AR Builder · Est. 2010</span>
+      </div>
+      <h1 class="ah-title" style="font-size:clamp(44px,7.4vw,150px);line-height:1.02;letter-spacing:-0.05em;color:#fff">
+        <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.2" style="display:block">Architects &amp; builders,</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.34" style="display:block;color:rgba(255,255,255,0.6)">crafting legacies.</span></span>
+      </h1>
+      <div class="ah-row" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px">
+        <p data-reveal="" data-delay="0.46" style="max-width:480px;font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.82);text-wrap:pretty">AR Builder brings together architectural vision and engineering excellence to create homes, schools and spaces across Tamil Nadu that are built to stand for generations.</p>
+        <div class="ah-cue" data-reveal="" data-delay="0.56" aria-hidden="true" style="display:flex;align-items:center;gap:14px;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75)">
+          <span>Scroll to explore</span>
+          <span class="ah-cue__line" style="position:relative;width:1px;height:44px;background:rgba(255,255,255,0.25);overflow:hidden"><span data-about-cue="" style="position:absolute;inset:0;background:#fff;animation:scrollLine 2s cubic-bezier(.65,0,.35,1) infinite"></span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who we are -->
+  <section data-screen-label="Who we are" style="padding:clamp(72px,9vw,144px) var(--gutter) clamp(56px,7vw,112px)">
+    <div style="display:flex;flex-wrap:wrap;gap:48px 20px;align-items:center">
+      <div style="flex:6 1 420px;display:flex;flex-direction:column;gap:32px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Who we are</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(32px,3.8vw,58px);text-wrap:balance">Architecture is the art of how to waste space, <span style="color:#888880">wisely.</span></h2>
+        <div data-reveal="" data-delay="0.16" style="display:flex;flex-direction:column;gap:20px;max-width:560px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44">
+          <p>Founded with a vision to redefine construction standards in Chennai, AR Builder was established by its founder, M. Lawrence, and has spent over a decade perfecting the art of building. Every structure we create is a testament to our commitment to quality, precision, and the timeless pursuit of excellence.</p>
+          <p>We don't just construct buildings. We craft legacies. From the foundation to the final finishing, every detail is handled with the same care and expertise that has made us Chennai's most trusted builder.</p>
+        </div>
+      </div>
+      <div style="flex:5 1 340px;position:relative;padding:0 0 clamp(48px,6vw,96px) clamp(32px,5vw,80px)">
+        <div data-reveal="clip" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#EDE7DC">
+          <div data-parallax="8" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+            <video src="assets/dream-home.mp4" poster="assets/posters/dream-home.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          </div>
+        </div>
+        <div data-reveal="clip" data-delay="0.25" style="position:absolute;left:0;bottom:0;width:46%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#EDE7DC;box-shadow:0 0 0 8px #F8F5F0">
+          <div data-parallax="16" style="position:absolute;left:0;right:0;top:-12%;height:124%">
+            <img src="assets/school-b.jpg" alt="Sunlit school corridor at Montfort Academy" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="overflow:hidden;border-top:1px solid rgba(10,10,10,0.12);border-bottom:1px solid rgba(10,10,10,0.12);padding:clamp(20px,2.4vw,32px) 0">
+    <div style="display:flex;width:max-content;animation:marquee 50s linear infinite">
+      <div style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)">
+        <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="6">
+          <span style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(28px,3.4vw,52px);letter-spacing:-0.04em;line-height:1.1;white-space:nowrap">{{ m.t }}</span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)">
+        <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="6">
+          <span style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(28px,3.4vw,52px);letter-spacing:-0.04em;line-height:1.1;white-space:nowrap">{{ m.t }}</span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our journey: a gold line draws down the timeline as you scroll, lighting each milestone -->
+  <section data-screen-label="Our journey" style="padding:clamp(72px,9vw,144px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-wrap:wrap;gap:48px 20px;align-items:flex-start">
+      <div class="about-sticky" style="flex:4 1 300px;display:flex;flex-direction:column;gap:20px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Our journey</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);text-wrap:balance">Sixteen years, <span style="color:#888880">one standard.</span></h2>
+        <p data-reveal="" data-delay="0.16" style="max-width:380px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;text-wrap:pretty">Since 2010 we've built homes, schools and spaces across the state, including completed work, projects in progress, and the ones we hold closest.</p>
+      </div>
+      <div ref="{{ aboutTlRef }}" style="flex:7 1 440px;position:relative">
+        <div aria-hidden="true" style="position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:rgba(10,10,10,0.14)">
+          <div data-tl-fill="" style="position:absolute;inset:0;background:#C8A96E;transform-origin:top;transform:scaleY(0)"></div>
+        </div>
+        <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="5">
+          <div data-tl-node="" data-reveal="" data-delay="0.05" style="position:relative;display:flex;flex-direction:column;gap:14px;padding:0 0 clamp(48px,5.6vw,80px) clamp(40px,4vw,64px)">
+            <span data-tl-dot="" aria-hidden="true" style="position:absolute;left:0;top:4px;width:15px;height:15px;border-radius:50%;background:#F8F5F0;box-shadow:inset 0 0 0 1.5px rgba(10,10,10,0.25);transition:background .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)"></span>
+            <span style="font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#9A7B45">{{ m.tag }}</span>
+            <h3 style="font-size:clamp(24px,2.4vw,36px);text-wrap:balance">{{ m.title }}</h3>
+            <p style="max-width:520px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;text-wrap:pretty">{{ m.desc }}</p>
+            <sc-if value="{{ m.img }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;width:100%;max-width:560px;aspect-ratio:16/10;margin-top:8px;border-radius:16px;overflow:hidden;background:#EDE7DC">
+                <div data-parallax="6" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+                  <img src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ m.video }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;width:100%;max-width:560px;aspect-ratio:16/10;margin-top:8px;border-radius:16px;overflow:hidden;background:#EDE7DC">
+                <video src="assets/poes-3.mp4" poster="assets/posters/poes-3.jpg" autoplay="" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section data-screen-label="Numbers" style="position:relative;overflow:hidden;background:#0A0A0A;color:#fff;padding:clamp(56px,8vw,128px) var(--gutter)">
+    <x-import component-from-global-scope="particle-bg" from="./ar-effects.js" style="position:absolute;inset:0;pointer-events:none" hint-size="100%,100%"></x-import>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(48px,6vw,88px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+            <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+            <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">By the numbers</span>
+          </div>
+          <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);color:#fff;text-wrap:balance">Numbers that speak <span style="color:#888880">for themselves.</span></h2>
+        </div>
+        <p data-reveal="" data-delay="0.16" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.65);max-width:380px">Sixteen years of building trust, one project at a time.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:48px 20px">
+        <sc-for list="{{ aboutStats }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="" data-delay="{{ s.delay }}" data-count="{{ s.key }}" style="display:flex;flex-direction:column;gap:20px">
+            <div data-reveal="draw" data-delay="{{ s.delay }}" style="height:1px;background:rgba(255,255,255,0.28)"></div>
+            <div style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(52px,6vw,104px);letter-spacing:-0.05em;line-height:1;color:#fff">{{ s.num }}<span style="color:#C8A96E">{{ s.suffix }}</span></div>
+            <span style="font-size:18px;font-weight:500;color:rgba(255,255,255,0.65)">{{ s.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section data-screen-label="What we do" style="padding:clamp(72px,9vw,144px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px;margin-bottom:clamp(40px,4.4vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">What we do</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);max-width:16ch;text-wrap:balance">One team, <span style="color:#888880">every discipline.</span></h2>
+      </div>
+      <p data-reveal="" data-delay="0.16" style="max-width:380px;font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;text-wrap:pretty">From the first sketch to the final key, we handle design, construction and interiors under one roof.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="7">
+        <div data-reveal="" data-delay="{{ s.cardDelay }}" style="display:flex">
+          <div class="about-card" style="position:relative;width:100%;min-height:clamp(220px,18vw,280px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;padding:clamp(22px,2.2vw,32px);border-radius:20px;background:#fff;overflow:hidden">
+            <span class="about-card__line" aria-hidden="true"></span>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:16px;font-weight:500;color:#888880">{{ s.num }}</span>
+              <span class="about-card__arrow" style="width:36px;height:36px;border-radius:50%;background:#F8F5F0;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:#0A0A0A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"></path></svg></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <h3 style="font-size:clamp(22px,2vw,30px)">{{ s.title }}</h3>
+              <p style="font-size:clamp(15px,calc(13px + .3vw),17px);color:#4A4A44;text-wrap:pretty">{{ s.desc }}</p>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+      <div data-reveal="" data-delay="0.16" style="display:flex">
+        <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" class="about-card" style="position:relative;width:100%;min-height:clamp(220px,18vw,280px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;padding:clamp(22px,2.2vw,32px);border-radius:20px;background:#0A0A0A;color:#fff;overflow:hidden">
+          <span class="about-card__line" aria-hidden="true"></span>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:16px;font-weight:500;color:rgba(255,255,255,0.55)">Your project</span>
+            <span class="about-card__arrow" style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" style="fill:none;stroke:#0A0A0A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"></path></svg></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <h3 style="font-size:clamp(22px,2vw,30px);color:#fff">Have something in mind?</h3>
+            <p style="font-size:clamp(15px,calc(13px + .3vw),17px);color:rgba(255,255,255,0.7);text-wrap:pretty">Tell us about it, and we'll find the best path to build it.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section data-screen-label="How we work" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(48px,6vw,96px)">
+      <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">How we work</span>
+      </div>
+      <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);max-width:20ch;text-wrap:balance">From vision to reality, <span style="color:#888880">every step perfected.</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:40px 20px">
+      <sc-for list="{{ processSteps }}" as="p" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <span data-reveal="" data-delay="{{ p.delay }}" style="font-family:Switzer,sans-serif;font-weight:500;font-size:clamp(44px,4.4vw,72px);letter-spacing:-0.05em;line-height:1;color:#C8A96E">{{ p.num }}</span>
+          <div data-reveal="draw" data-delay="{{ p.delay }}" style="height:1px;background:rgba(10,10,10,0.28)"></div>
+          <h3 data-reveal="" data-delay="{{ p.delay }}" style="font-size:clamp(20px,1.8vw,26px);line-height:1.25">{{ p.title }}</h3>
+          <p data-reveal="" data-delay="{{ p.delay }}" style="font-size:clamp(15px,calc(13px + .35vw),18px);color:#4A4A44;max-width:300px;text-wrap:pretty">{{ p.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Client voices -->
+  <section data-screen-label="Client voices" style="padding:clamp(56px,8vw,128px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(40px,4.4vw,64px)">
+      <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+        <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+        <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Client voices</span>
+      </div>
+      <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(36px,4.45vw,64px);text-wrap:balance">Trusted by the people <span style="color:#888880">we build for.</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+      <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+        <div data-reveal="" data-delay="{{ t.delay }}" style="display:flex">
+          <div style="width:100%;min-height:clamp(320px,26vw,400px);display:flex;flex-direction:column;justify-content:space-between;gap:40px;padding:clamp(20px,2.2vw,32px);border-radius:20px;background:#fff">
+            <p style="font-family:Switzer,sans-serif;font-size:clamp(19px,1.6vw,24px);line-height:1.32;letter-spacing:-0.02em;text-wrap:pretty">“{{ t.quote }}”</p>
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="height:1px;background:rgba(10,10,10,0.12)"></div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:18px;font-weight:500;line-height:1.2">{{ t.name }}</span>
+                <span style="font-size:16px;color:#4A4A44">{{ t.detail }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section data-screen-label="CTA" style="padding:clamp(20px,3vw,40px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div data-reveal="clip" style="position:relative;overflow:hidden;border-radius:20px;background:#0A0A0A;min-height:clamp(480px,44vw,700px);display:flex;align-items:flex-end;padding:clamp(24px,4vw,64px)">
+      <div data-parallax="8" style="position:absolute;left:0;right:0;top:-10%;height:120%">
+        <img src="assets/kavi-a.jpg" alt="Kavi Illam, completed residence" loading="lazy" onError="{{ mediaErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%">
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.35) 100%)"></div>
+      <x-import component-from-global-scope="particle-bg" from="./ar-effects.js" style="position:absolute;inset:0;pointer-events:none" hint-size="100%,100%"></x-import>
+      <div style="position:relative;z-index:1;width:100%;display:flex;flex-direction:column;gap:32px">
+        <div data-reveal="" style="display:flex;align-items:center;gap:10px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+          <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:rgba(255,255,255,0.75)">Let's build together</span>
+        </div>
+        <h2 data-reveal="" data-delay="0.08" style="font-size:clamp(40px,6.2vw,104px);line-height:1.02;letter-spacing:-0.05em;color:#fff;max-width:16ch;text-wrap:balance">Your vision. Our craft. <span style="color:rgba(255,255,255,0.55)">One exceptional result.</span></h2>
+        <div data-reveal="" data-delay="0.16" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+          <p style="font-size:clamp(15px,calc(13px + .35vw),18px);color:rgba(255,255,255,0.75);max-width:440px">Ready to start your project? Our team is here to guide you from the first sketch to the final key.</p>
+          <a href="#" onClick="{{ nav.contact }}" data-cursor-hover="" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:14px 28px;border-radius:50px;background:#fff;color:#0A0A0A;font-size:18px;font-weight:500;letter-spacing:-0.03em;line-height:1.12;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#C8A96E;color:#0A0A0A;gap:14px">Start a conversation
+            <svg width="16" height="16" viewBox="0 0 16 16" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Privacy Policy">
+  <section style="padding:clamp(120px,12vw,168px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div data-reveal="" style="display:flex;align-items:center;gap:10px;margin-bottom:clamp(20px,2vw,28px)">
+      <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+      <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Last updated · 5 October 2026</span>
+    </div>
+    <h1 style="font-size:clamp(52px,9vw,180px);line-height:1;letter-spacing:-0.05em">
+      <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.1" style="display:block">Privacy Policy</span></span>
+    </h1>
+    <p data-reveal="" data-delay="0.2" style="max-width:640px;margin-top:clamp(20px,2.4vw,32px);font-size:clamp(17px,1.4vw,22px);line-height:1.5;color:#4A4A44;text-wrap:pretty">The only personal information we collect is what you choose to share through the enquiry form on our Contact page. This policy explains what that is, why we ask for it and how we look after it.</p>
+    <div style="margin-top:clamp(48px,6vw,96px)">
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">01</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">What we collect</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">When you submit the enquiry form, we receive:</p><ul style="display:flex;flex-direction:column;gap:6px;padding-left:20px;font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44"><li>Your name</li><li>Phone number</li><li>Email address</li><li>Project type and location</li><li>Estimated budget (optional)</li><li>The project details you write</li></ul><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We do not use tracking cookies, analytics profiling or advertising pixels, and we do not collect any information from you when you simply browse the site.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">02</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Why we collect it</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We use your details only to respond to your enquiry: to contact you, understand your project, prepare an estimate and arrange a site visit or meeting if you ask for one.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">03</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">How we store it</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">Form submissions are delivered to our business email inbox and are accessible only to the AR Builder team handling your enquiry. We take reasonable measures to keep this information secure.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">04</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">How long we keep it</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We keep enquiry details for as long as needed to respond and, if you become a client, for the duration of the project and any legal record-keeping period that follows. Enquiries that do not lead to a project are deleted within 12 months.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">05</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Sharing</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We do not sell, rent or trade your information. We will not share it with third parties except where required by law or, with your consent, with a consultant or partner directly involved in your project.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">06</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Your choices</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">You can ask us at any time to view, correct or delete the details you have sent us. Just get in touch using the contact information below and we will act on it promptly.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">07</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Third-party links</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">Our site links to Instagram and WhatsApp. Those services have their own privacy policies, which apply once you leave this site.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">08</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Contact</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">AR Builder, Triplicane, Chennai – 600 005<br>Phone: <a href="tel:+918667866915" style="color:#0A0A0A">+91 86678 66915</a><br>Email: <a href="mailto:arbuilderenquiries@gmail.com" style="color:#0A0A0A">arbuilderenquiries@gmail.com</a></p></div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+<sc-if value="{{ isTerms }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Terms of Use">
+  <section style="padding:clamp(120px,12vw,168px) var(--gutter) clamp(40px,5.6vw,80px)">
+    <div data-reveal="" style="display:flex;align-items:center;gap:10px;margin-bottom:clamp(20px,2vw,28px)">
+      <span style="width:11px;height:11px;border-radius:50%;background:#C8A96E;flex:none"></span>
+      <span style="font-size:clamp(15px,1.39vw,20px);letter-spacing:-0.04em;line-height:1.12;color:#888880">Last updated · 5 October 2026</span>
+    </div>
+    <h1 style="font-size:clamp(52px,9vw,180px);line-height:1;letter-spacing:-0.05em">
+      <span style="display:block;overflow:hidden;padding-bottom:0.2em;margin-bottom:-0.14em"><span data-reveal="line" data-delay="0.1" style="display:block">Terms of Use</span></span>
+    </h1>
+    <p data-reveal="" data-delay="0.2" style="max-width:640px;margin-top:clamp(20px,2.4vw,32px);font-size:clamp(17px,1.4vw,22px);line-height:1.5;color:#4A4A44;text-wrap:pretty">These terms govern your use of the AR Builder website. By using the site or submitting the enquiry form, you agree to them.</p>
+    <div style="margin-top:clamp(48px,6vw,96px)">
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">01</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Use of this website</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">This website provides information about AR Builder, our services and past work. You may browse it for personal, non-commercial purposes. Please do not misuse the site, attempt to disrupt it or submit content that is unlawful or misleading.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">02</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Enquiry form</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">By submitting the form you confirm that the information you provide is accurate and that you are authorised to share it. You agree that we may contact you by phone, email or WhatsApp to respond to your enquiry. How we handle this information is described in our <a href="#" onClick="{{ nav.privacy }}" style="color:#0A0A0A;text-decoration:underline;text-underline-offset:3px">Privacy Policy</a>.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">03</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">No binding offer</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">Submitting an enquiry does not create a contract or obligation on either side. Any quotation, timeline or scope of work becomes binding only when set out in a separate written agreement signed by both parties.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">04</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Content &amp; images</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">All text, photographs, videos, drawings and the AR Builder logo on this site are owned by AR Builder or used with permission. They may not be copied, reproduced or used commercially without our written consent.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">05</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Accuracy of information</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We aim to keep project descriptions and service information accurate and up to date, but they are provided for general information only. Final specifications, materials and costs are confirmed for each project individually.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">06</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Liability</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">To the extent permitted by law, AR Builder is not liable for any loss arising from use of this website or reliance on its content. Nothing in these terms limits liability that cannot be excluded under Indian law.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">07</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Changes</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">We may update these terms from time to time. The date at the top of this page shows when they were last revised.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">08</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Governing law</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">These terms are governed by the laws of India, and any disputes are subject to the jurisdiction of the courts in Chennai, Tamil Nadu.</p></div>
+      </div>
+      <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:clamp(28px,3vw,40px) 0;border-top:1px solid rgba(10,10,10,0.18)">
+        <span style="font-size:16px;color:#888880">09</span>
+        <div style="grid-column:span 2;display:flex;flex-direction:column;gap:12px;max-width:760px"><h2 style="font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-0.04em;margin-bottom:12px">Contact</h2><p style="font-size:clamp(15px,calc(13px + .35vw),18px);line-height:1.6;color:#4A4A44;text-wrap:pretty">AR Builder, Triplicane, Chennai – 600 005<br>Phone: <a href="tel:+918667866915" style="color:#0A0A0A">+91 86678 66915</a><br>Email: <a href="mailto:arbuilderenquiries@gmail.com" style="color:#0A0A0A">arbuilderenquiries@gmail.com</a></p></div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+<footer style="padding:clamp(40px,5.6vw,80px) var(--gutter) 24px">
+  <div style="display:flex;flex-wrap:wrap;gap:40px 20px;margin-bottom:64px">
+    <div style="flex:4 1 300px;display:flex;flex-direction:column;gap:16px">
+      <img src="assets/ar-logo.png" alt="AR Builder" style="display:block;height:clamp(72px,7vw,104px);width:auto;align-self:flex-start">
+      <span style="font-size:18px;color:#888880">Building excellence since 2010</span>
+    </div>
+    <div style="flex:2 1 160px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:18px;font-weight:500;color:#888880">Navigation</span>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="4">
+          <a href="#" onClick="{{ l.go }}" aria-label="{{ l.label }}" data-cursor-text="" class="flip" style="font-family:Switzer,sans-serif;font-size:18px;line-height:1.32;color:#0A0A0A"><span class="flip__row"><sc-for list="{{ l.chars }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ l.chars }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+        </sc-for>
+      </div>
+    </div>
+    <div style="flex:3 1 220px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:18px;font-weight:500;color:#888880">Reach us</span>
+      <div style="display:flex;flex-direction:column;gap:6px;font-family:Switzer,sans-serif;font-size:18px;line-height:1.32">
+        <a href="tel:+918667866915" aria-label="+91 86678 66915" data-cursor-text="" class="flip" style="align-self:flex-start;color:#0A0A0A"><span class="flip__row"><sc-for list="{{ flipText.phone }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ flipText.phone }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+        <a href="mailto:arbuilderenquiries@gmail.com" aria-label="arbuilderenquiries@gmail.com" data-cursor-text="" class="flip" style="align-self:flex-start;color:#0A0A0A"><span class="flip__row"><sc-for list="{{ flipText.email }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ flipText.email }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+        <span style="color:#888880">Mon–Sat · 9AM – 7PM IST</span>
+      </div>
+    </div>
+    <div style="flex:3 1 260px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:18px;font-weight:500;color:#888880">Socials</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a href="https://www.instagram.com/a.r.builder/" target="_blank" rel="noopener" aria-label="Instagram" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6"></circle></svg></a>
+          <a href="tel:+918667866915" aria-label="Call us" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+          <a href="mailto:arbuilderenquiries@gmail.com" aria-label="Email us" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg></a>
+          <a href="https://wa.me/918667866915" target="_blank" rel="noopener" aria-label="WhatsApp" data-cursor-hover="" style="width:38px;height:38px;flex:none;border-radius:50%;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path></svg></a>
+        </div>
+        <p style="font-size:14px;line-height:1.3;color:#888880">Design by <a href="https://www.elevateonex.com" target="_blank" rel="noopener" data-cursor-text="" style="font-weight:600;color:#0A0A0A;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .3s" style-hover="text-decoration-color:#0A0A0A">Elevate One X</a></p>
+      </div>
+      <button onClick="{{ toTop }}" aria-label="Back to top" data-cursor-hover="" style="width:60px;height:60px;flex:none;margin-top:calc(18px * 1.32 + 5px);align-self:flex-start;border:0;border-radius:20px;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.44,0,.56,1)" style-hover="background:#0A0A0A;color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
+    </div>
+  </div>
+  <div style="height:1px;background:rgba(10,10,10,0.18)"></div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:24px">
+    <span style="font-size:14px;color:#888880">Triplicane, Chennai – 600 005</span>
+    <span style="font-size:16px;color:#888880">©2010 AR Builder. All rights reserved.</span>
+    <div style="display:flex;gap:20px;font-family:Switzer,sans-serif;font-weight:500;font-size:14px;letter-spacing:-0.04em">
+      <a href="#" onClick="{{ nav.privacy }}" aria-label="Privacy Policy" class="flip" style="color:#0A0A0A;opacity:0.66;transition:opacity .3s" style-hover="opacity:1"><span class="flip__row"><sc-for list="{{ flipText.privacy }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ flipText.privacy }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+      <a href="#" onClick="{{ nav.terms }}" aria-label="Terms" class="flip" style="color:#0A0A0A;opacity:0.66;transition:opacity .3s" style-hover="opacity:1"><span class="flip__row"><sc-for list="{{ flipText.terms }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span><span class="flip__row flip__row--b" aria-hidden="true"><sc-for list="{{ flipText.terms }}" as="ch"><span class="flip__ch" style="transition-delay:{{ ch.d }}">{{ ch.c }}</span></sc-for></span></a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;smoothScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Effects&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Effects&quot;},&quot;particles&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Effects&quot;},&quot;showLoader&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Effects&quot;}}">
+const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const EASE = "cubic-bezier(.22,1,.36,1)";
+const media = (src) => { const v = /\.(mp4|webm|mov|m4v)$/i.test(src); return { src, isVideo: v, isImg: !v }; };
+
+const SERVICES = [
+  { title: "Architecture", desc: "Considered design from the first sketch to construction drawings, shaped around how you live and work." },
+  { title: "Building & Construction", desc: "Structural work executed by our own teams, with strict quality control at every stage." },
+  { title: "Interior Design", desc: "Spaces as beautiful inside as they are outside, with complete and considered interiors." },
+  { title: "Renovation", desc: "Breathing new life into existing structures with precision and respect for original craftsmanship." },
+  { title: "Turnkey Projects", desc: "One team from design to handover. You receive the keys; we handle everything in between." },
+  { title: "Space Planning", desc: "Layouts that make every square foot work harder, before a single brick is laid." },
+  { title: "Joint Venture", desc: "Partnering with landowners to develop properties together, from approvals to handover." },
+];
+const HERO_TILES = [
+  { label: "Poes Garden · In progress", dot: "#C8A96E", alt: "Poes Garden residence under construction", ...media("assets/poes-1.mp4") },
+  { label: "Kavi Illam · Completed", dot: "#0A0A0A", alt: "Kavi Illam, completed residence", ...media("assets/kavi-b.jpg") },
+  { label: "Montfort Academy · Completed", dot: "#0A0A0A", alt: "Montfort Academy entrance, Mylapore", ...media("assets/school-a.jpg") },
+];
+const MONTFORT = [
+  { src: "assets/school-a.jpg", alt: "School entrance arch, Mylapore" },
+  { src: "assets/school-b.jpg", alt: "Sunlit school corridor" },
+  { src: "assets/school-c.jpg", alt: "St. Montfort statue" },
+];
+const REELS = [
+  { label: "Poes Garden · Brickwork", alt: "", ...media("assets/poes-2.mp4") },
+  { label: "Poes Garden · Upper floor", alt: "", ...media("assets/poes-3.mp4") },
+  { label: "Poes Garden · Terrace level", alt: "", ...media("assets/poes-4.mp4") },
+  { label: "On site · Work in progress", alt: "", ...media("assets/wip.mp4") },
+  { label: "On site · Craftsmanship", alt: "", ...media("assets/dream-home.mp4") },
+];
+const BA_VIEWS = [
+  { label: "Front elevation", before: "assets/kavi-a.jpg", after: "assets/kavi-c.jpg" },
+  { label: "Corner view", before: "assets/kavi-d.jpg", after: "assets/kavi-b.jpg" },
+];
+const STEPS = [
+  { num: "01", title: "Consultation", desc: "Understanding your vision, goals, timeline, and budget in complete detail." },
+  { num: "02", title: "Design & Planning", desc: "Architectural planning, structural engineering, and material selection with precision." },
+  { num: "03", title: "Construction", desc: "Expert execution with daily progress updates and strict quality control at every stage." },
+  { num: "04", title: "Handover", desc: "Final inspection, punch-list completion and a seamless handover. On time, every time." },
+];
+const TESTIMONIALS = [
+  { quote: "AR Builder transformed our dream into reality. The attention to detail, quality of materials, and professional conduct throughout was nothing short of exceptional.", name: "Rajesh Krishnamurthy", detail: "Villa Owner · Adyar" },
+  { quote: "From consultation to handover, every promise was kept. Our commercial complex was delivered ahead of schedule and exceeded our expectations in every way.", name: "Priya Subramaniam", detail: "Commercial Project · Anna Nagar" },
+  { quote: "The craftsmanship is at a level I've rarely seen. AR Builder understands that a building is not just a structure. It is a legacy.", name: "Arun Venkatesh", detail: "Luxury Apartment · OMR" },
+];
+const IMPACT_STATS = [
+  { key: "i0", value: 32, suffix: "+", label: "Projects across Tamil Nadu", dur: 1800 },
+  { key: "i1", value: 16, suffix: "", label: "Years building, since 2010", dur: 1800 },
+  { key: "i2", value: 2, suffix: "", label: "Montfort school campuses", dur: 1200 },
+];
+const MARQUEE = ["Interior Design", "Renovation", "Architecture", "Builder", "Turnkey Projects", "Precision", "Space Planning", "Execution", "Expertise", "Joint Venture"];
+// Contact form delivery via Web3Forms (https://web3forms.com). Submissions are emailed to the address
+// the access key was created with (arbuilderenquiries@gmail.com). Web3Forms keys are designed to be
+// public in website code. Paste the key from the Web3Forms dashboard here:
+const WEB3FORMS_ACCESS_KEY = "44e194dd-7bb6-45c0-ae1e-071e55fdac48";
+const EMPTY = { name: "", phone: "", email: "", projectType: "", location: "", budget: "", message: "", source: "" };
+const REQUIRED = ["name", "phone", "email", "projectType", "location", "message"];
+// Contact form dropdowns (custom glass listbox; see .dd styles). Keys match the form fields.
+const DROPDOWNS = {
+  projectType: { placeholder: "Select a project type", options: ["Residential", "Commercial", "Education", "Architecture", "Interior Design", "Renovation", "Turnkey Project", "Joint Venture", "Other"] },
+  budget: { placeholder: "Select a range", options: ["Below ₹25L", "₹25L–₹50L", "₹50L–₹1Cr", "Above ₹1Cr", "Prefer not to say"] },
+};
+const PHONE_RE = /^\+?\d{10,15}$/;
+// Phone field accepts digits only, with one optional "+" at the start (typed or pasted input is cleaned).
+const cleanPhone = (v) => { const s = String(v).replace(/[^\d+]/g, ""); return ((s[0] === "+" ? "+" : "") + s.replace(/\+/g, "")).slice(0, 16); };
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const CAROUSEL = {
+  items: [
+    { src: "assets/carousel/01.jpeg", alt: "Terracotta walls and cacti under a blue sky", title: "Terracotta" },
+    { src: "assets/carousel/02.jpeg", alt: "Pale blue wall with an orange door beside a flame tree", title: "Threshold" },
+    { src: "assets/carousel/03.jpeg", alt: "Carved arch opening onto a terrace and the sea", title: "Archway" },
+    { src: "assets/carousel/04.jpeg", alt: "Green villa with a striped awning over a pool", title: "Poolside" },
+    { src: "assets/carousel/05.jpeg", alt: "Red pavilion with a pine tree casting its shadow", title: "Red Pavilion" },
+    { src: "assets/carousel/06.jpeg", alt: "Receding orange arches framing a palm tree", title: "The Vision" },
+    { src: "assets/carousel/07.jpeg", alt: "White house with a lap pool facing the sea", title: "Horizon" }
+  ],
+  preset: "liquid", intro: "rise", cardHeight: 0.5, gap: 12, squeeze: 0.2,
+  focusOnClick: true, captions: true, captureWheel: false
+};
+
+// Each page has its own clean URL (/home, /about, /contact, /privacy, /terms), so links can be shared
+// and a reload reopens the same page. The server rewrites these paths to index.html (vercel.json, serve.py).
+const PAGES = ["about", "contact", "privacy", "terms"];
+const pageFromUrl = () => {
+  const seg = window.location.pathname.replace(/\/+$/, "").split("/").pop().toLowerCase();
+  if (PAGES.includes(seg)) return seg;
+  const h = window.location.hash.replace("#", ""); // old /#about style links keep working
+  return PAGES.includes(h) ? h : "home";
+};
+const pageUrl = (page) => "/" + page + window.location.search;
+// Always open at the top: browser scroll restoration would otherwise drop you mid-way down the home page.
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+// About page: milestones drawn from the projects already on the site, and the stats band.
+const MILESTONES = [
+  { tag: "2010 · Chennai", title: "Where it all began", desc: "AR Builder is founded as architects and builders in Chennai, with our head office in Triplicane.", img: "", video: "" },
+  { tag: "Education", title: "Montfort Academy Higher Secondary School", desc: "A school in Mylapore that became more than a project. This one was home. Two Montfort school campuses, delivered.", img: "assets/school-a.jpg", alt: "Montfort Academy entrance arch, Mylapore", video: "" },
+  { tag: "Residential · Completed", title: "Kavi Illam", desc: "A residence built for a close friend who placed their trust in us at every step. It is a project we'll always be proud of.", img: "assets/kavi-b.jpg", alt: "Kavi Illam, completed residence", video: "" },
+  { tag: "Residential · In progress", title: "Poes Garden residence", desc: "A luxurious three-floor residence in the heart of Poes Garden, rising beam by beam.", img: "", video: "assets/poes-3.mp4" },
+  { tag: "Today", title: "32+ projects across Tamil Nadu", desc: "Homes, schools and spaces, including completed work, projects in progress, and the ones we hold closest.", img: "", video: "" },
+];
+const ABOUT_STATS = [
+  { key: "a0", value: 32, suffix: "+", label: "Projects across Tamil Nadu", dur: 1800 },
+  { key: "a1", value: 16, suffix: "", label: "Years building, since 2010", dur: 1800 },
+  { key: "a2", value: 2, suffix: "", label: "Montfort school campuses", dur: 1200 },
+  { key: "a3", value: 7, suffix: "", label: "Disciplines under one roof", dur: 1400 },
+];
+
+// Letter-flip hover links: each character with its stagger delay.
+const flipChars = (t) => t.split("").map((c, i) => ({ c, d: i * 25 + "ms" }));
+const FLIP_TEXT = {
+  phone: flipChars("+91 86678 66915"),
+  email: flipChars("arbuilderenquiries@gmail.com"),
+  privacy: flipChars("Privacy Policy"),
+  terms: flipChars("Terms"),
+};
+
+// Intro "magic text": words brighten one by one as the pinned paragraph is scrolled through.
+const INTRO_TEXT = "From concept to execution, we craft exceptional residential, commercial, and joint-venture spaces through master construction and bespoke interior design. Whether you are building from the ground up or breathing new life into an existing site, we deliver end-to-end expertise tailored to your vision.";
+const INTRO_WORDS = INTRO_TEXT.split(" ");
+const INTRO = { pinVh: 135, dim: 0.14, ramp: 4, end: 0.85 };
+
+// Scroll-scrubbed hero film: every source frame of assets/herovid.mp4 (7.08s @ 24fps), exported as WebP.
+const HERO = {
+  count: 169, pad: 4, scrollVh: 500, lerp: 0.18, mobileMax: 780, concurrency: 6,
+  dirs: { desktop: "assets/hero-frames/desktop", mobile: "assets/hero-frames/mobile" },
+};
+// Coarse-to-fine load order, so any scroll position has a nearby frame early on.
+const HERO_ORDER = (() => {
+  const seen = new Set(), out = [];
+  for (let step = 32; step >= 1; step >>= 1)
+    for (let i = 0; i < HERO.count; i += step) if (!seen.has(i)) { seen.add(i); out.push(i); }
+  if (!seen.has(HERO.count - 1)) out.splice(1, 0, HERO.count - 1);
+  return out;
+})();
+
+class Component extends DCLogic {
+  state = {
+    page: pageFromUrl(), w: window.innerWidth, introPin: 120, scrolled: false, menuOpen: false, menuShown: false, menuClosing: false,
+    loader: this.props.showLoader === false ? "off" : "on",
+    counts: {}, baView: 0, baPos: 78, dragging: false,
+    form: { ...EMPTY }, errors: {}, status: "idle",
+    dd: null, ddHi: 0,
+  };
+  progressRef = React.createRef();
+  baRef = React.createRef();
+  heroRef = React.createRef();
+  aboutHeroRef = React.createRef();
+  aboutTlRef = React.createRef();
+  introRef = React.createRef();
+  heroCanvasRef = React.createRef();
+  heroCueRef = React.createRef();
+  heroStores = { desktop: this.heroMakeStore(HERO.dirs.desktop), mobile: this.heroMakeStore(HERO.dirs.mobile) };
+  heroCur = 0; heroDrawn = -1; heroTop = 0; heroDist = 1; heroEnd = 0; heroCueOn = true; heroAdvanced = false; lastY = 0; progUntil = 0;
+  revealOn = false;
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    // Show the clean address for the current page (e.g. "/" or "/#about" becomes "/home" or "/about").
+    if (window.location.pathname !== "/" + this.state.page || window.location.hash) history.replaceState(null, "", pageUrl(this.state.page));
+    this.onPop = () => { const page = pageFromUrl(); if (page !== this.state.page) this.setState({ page, ...this.menuCloseState() }, () => this.scrollToY(0, true)); };
+    this.onKey = (e) => { if (e.key === "Escape" && this.state.menuOpen) this.closeMenu(); };
+    window.addEventListener("keydown", this.onKey);
+    window.addEventListener("popstate", this.onPop);
+    this.onScroll = () => this.handleScroll();
+    this.onResize = () => { this.setState({ w: window.innerWidth }); this.heroSetup(); this.introSetup(); this.handleScroll(); };
+    this.onVis = () => { if (!document.hidden) this.kickVideos(); };
+    this.vidDog = setInterval(() => this.videoWatch(), 3000);
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    window.addEventListener("resize", this.onResize);
+    document.addEventListener("visibilitychange", this.onVis);
+    this.svcMQ = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 900px)");
+    this.onSvcMove = (e) => this.svcPointer(e);
+    document.addEventListener("pointermove", this.onSvcMove, { passive: true });
+    document.addEventListener("pointerover", this.onSvcMove, { passive: true });
+    this.onSwipe = (e) => { if (!this.state.swiped && e.target.closest && e.target.closest("#gallery")) this.setState({ swiped: true }); };
+    document.addEventListener("pointerdown", this.onSwipe, true);
+    // Close an open form dropdown when clicking or tapping anywhere outside it.
+    this.onDdOutside = (e) => { const k = this.state.dd; if (k && !(e.target.closest && e.target.closest('[data-dd="' + k + '"]'))) this.ddClose(); };
+    document.addEventListener("pointerdown", this.onDdOutside, true);
+    this._ps = { page: this.state.page, menuOpen: this.state.menuOpen };
+    this._pp = { customCursor: this.props.customCursor, particles: this.props.particles, smoothScroll: this.props.smoothScroll };
+    this.prepReveals();
+    new Image().src = "assets/menu-living.jpg"; // preload so the menu photo is ready on first open
+    this.heroSetup();
+    this.introSetup();
+    if (document.fonts) document.fonts.ready.then(() => this.introSetup()); // paragraph height changes once Switzer loads
+    this.heroLoop = () => { this.heroTick(); this.heroRaf = requestAnimationFrame(this.heroLoop); };
+    this.heroRaf = requestAnimationFrame(this.heroLoop);
+    if (this.state.loader === "on") {
+      this.t1 = setTimeout(() => { this.setState({ loader: "leaving" }); this.startReveals(); }, 1900);
+      this.t2 = setTimeout(() => this.setState({ loader: "off" }), 2950);
+    } else this.startReveals();
+    this.initLenis();
+    this.syncEffects();
+    this.handleScroll();
+    this.kickVideos();
+    this.t3 = setTimeout(() => this.kickVideos(), 300);
+  }
+  componentDidUpdate() {
+    const s = this.state, p = this.props;
+    const ps = this._ps || { page: s.page, menuOpen: s.menuOpen };
+    const pp = this._pp || { customCursor: p.customCursor, particles: p.particles, smoothScroll: p.smoothScroll };
+    this._ps = { page: s.page, menuOpen: s.menuOpen };
+    this._pp = { customCursor: p.customCursor, particles: p.particles, smoothScroll: p.smoothScroll };
+    if (ps.page !== s.page && s.dd) this.setState({ dd: null });
+    if (ps.page !== s.page) { this.prepReveals(); if (this.revealOn) this.observeAll(); this.kickVideos(); this.heroSetup(); this.introSetup(); this.handleScroll(); }
+    if (pp.customCursor !== this.props.customCursor || pp.particles !== this.props.particles) this.syncEffects();
+    if (pp.smoothScroll !== this.props.smoothScroll) { this.destroyLenis(); this.initLenis(); }
+    if (ps.menuOpen !== s.menuOpen && this.lenis) s.menuOpen ? this.lenis.stop() : this.lenis.start();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onResize);
+    document.removeEventListener("visibilitychange", this.onVis);
+    document.removeEventListener("pointerdown", this.onSwipe, true);
+    document.removeEventListener("pointerdown", this.onDdOutside, true);
+    window.removeEventListener("popstate", this.onPop);
+    window.removeEventListener("keydown", this.onKey);
+    document.removeEventListener("pointermove", this.onSvcMove);
+    document.removeEventListener("pointerover", this.onSvcMove);
+    clearTimeout(this.svcT);
+    clearTimeout(this.menuT);
+    window.__arPaused = false;
+    [this.t1, this.t2, this.t3, this.timer].forEach(clearTimeout);
+    cancelAnimationFrame(this.heroRaf);
+    clearInterval(this.fxPoll);
+    clearInterval(this.vidDog);
+    this.io && this.io.disconnect();
+    this.vio && this.vio.disconnect();
+    this.destroyLenis();
+  }
+
+  // Contact form dropdowns: open/close, pick, and listbox keyboard support.
+  ddOpen(k) {
+    const i = DROPDOWNS[k].options.indexOf(this.state.form[k]);
+    this.setState({ dd: k, ddHi: i < 0 ? 0 : i });
+  }
+  ddClose() { if (this.state.dd) this.setState({ dd: null }); }
+  ddPick(k, v) {
+    this.setState((p) => ({ dd: null, form: { ...p.form, [k]: v }, errors: { ...p.errors, [k]: undefined } }));
+  }
+  ddKey(k, e) {
+    const open = this.state.dd === k, n = DROPDOWNS[k].options.length, hi = this.state.ddHi;
+    const move = (to) => { e.preventDefault(); if (!open) this.ddOpen(k); else this.setState({ ddHi: (to + n) % n }); };
+    switch (e.key) {
+      case "ArrowDown": return move(hi + 1);
+      case "ArrowUp": return move(hi - 1);
+      case "Home": if (open) { e.preventDefault(); this.setState({ ddHi: 0 }); } return;
+      case "End": if (open) { e.preventDefault(); this.setState({ ddHi: n - 1 }); } return;
+      case "Enter": case " ":
+        e.preventDefault();
+        return open ? this.ddPick(k, DROPDOWNS[k].options[hi]) : this.ddOpen(k);
+      case "Escape": if (open) { e.preventDefault(); e.stopPropagation(); this.ddClose(); } return;
+      case "Tab": if (open) this.ddClose(); return;
+    }
+  }
+
+  initLenis() {
+    if (this.lenis || REDUCE || this.props.smoothScroll === false) return;
+    const L = window.Lenis;
+    if (!L) { if ((this.lp = (this.lp || 0) + 1) < 40) this.lenisPoll = setTimeout(() => this.initLenis(), 150); return; }
+    this.lenis = new L({ lerp: 0.085, smoothWheel: true });
+    const raf = (t) => { if (!this.lenis) return; this.lenis.raf(t); this.lenisRaf = requestAnimationFrame(raf); };
+    this.lenisRaf = requestAnimationFrame(raf);
+  }
+  destroyLenis() {
+    clearTimeout(this.lenisPoll); cancelAnimationFrame(this.lenisRaf);
+    if (this.lenis) { this.lenis.destroy(); this.lenis = null; }
+  }
+  scrollToY(target, immediate) {
+    this.progUntil = performance.now() + 1900; // programmatic scroll: don't let the hero auto-advance hijack it
+    const isNum = typeof target === "number";
+    if (this.lenis) { this.lenis.scrollTo(target, { offset: isNum ? 0 : -90, immediate: !!immediate, duration: 1.6 }); return; }
+    const top = isNum ? target : target.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
+  }
+
+  heroMakeStore(dir) { return { dir, imgs: new Array(HERO.count), ok: new Uint8Array(HERO.count), started: false }; }
+  heroStore() { return window.innerWidth <= HERO.mobileMax ? this.heroStores.mobile : this.heroStores.desktop; }
+  heroLoad(store, i, retries = 1) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        const done = () => { store.imgs[i] = img; store.ok[i] = 1; resolve(img); };
+        img.decode ? img.decode().then(done, done) : done();
+      };
+      img.onerror = () => { if (retries > 0) setTimeout(() => this.heroLoad(store, i, retries - 1).then(resolve), 200); else resolve(null); };
+      img.src = `${store.dir}/frame-${String(i + 1).padStart(HERO.pad, "0")}.webp`;
+    });
+  }
+  heroFetchAll(store) {
+    if (store.started) return;
+    store.started = true;
+    const order = REDUCE ? [HERO.count - 1] : HERO_ORDER;
+    let next = 0;
+    const worker = async () => { while (next < order.length) await this.heroLoad(store, order[next++]); };
+    for (let k = 0; k < HERO.concurrency; k++) worker();
+  }
+  heroNearest(store, i) {
+    if (store.ok[i]) return i;
+    for (let d = 1; d < HERO.count; d++) {
+      if (i - d >= 0 && store.ok[i - d]) return i - d;
+      if (i + d < HERO.count && store.ok[i + d]) return i + d;
+    }
+    return -1;
+  }
+  // Measures the pinned section and sizes the canvas; runs on mount, resize and page switches.
+  heroSetup() {
+    const sec = this.heroRef.current, cv = this.heroCanvasRef.current;
+    if (!sec || !cv) {
+      this.heroCanvas = null;
+      const ah = this.aboutHeroRef.current; // About hero: header turns solid once its bottom passes the photo
+      this.heroEnd = ah ? Math.max(0, ah.offsetTop + ah.offsetHeight - 80 - 130) : 0;
+      return;
+    }
+    if (cv !== this.heroCanvas) { this.heroCanvas = cv; this.heroCtx = cv.getContext("2d", { alpha: false }); this.heroDrawn = -1; this.heroCueOn = null; }
+    const store = this.heroStore();
+    if (store !== this.heroActive) { this.heroActive = store; this.heroDrawn = -1; }
+    this.heroFetchAll(store);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+    if (w && h && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; this.heroDrawn = -1; }
+    this.heroTop = sec.getBoundingClientRect().top + window.scrollY;
+    this.heroDist = Math.max(1, sec.offsetHeight - window.innerHeight);
+    this.heroEnd = this.heroTop + this.heroDist;
+    this.heroCur = this.heroTarget();
+    this.heroScroll(window.scrollY, false);
+  }
+  heroTarget() {
+    if (REDUCE) return HERO.count - 1;
+    return Math.max(0, Math.min(1, (window.scrollY - this.heroTop) / this.heroDist)) * (HERO.count - 1);
+  }
+  heroTick() {
+    if (!this.heroCanvas || window.__arPaused) return; // rAF itself pauses in hidden tabs
+    const t = this.heroTarget(), d = t - this.heroCur;
+    this.heroCur = Math.abs(d) < 0.05 ? t : this.heroCur + d * HERO.lerp;
+    this.heroDraw(Math.round(this.heroCur));
+    if (this.heroWantAdvance && this.heroDrawn >= HERO.count - 1) this.heroAdvance(); // film complete → next section
+  }
+  heroDraw(i) {
+    const store = this.heroActive, cv = this.heroCanvas, ctx = this.heroCtx;
+    const r = this.heroNearest(store, i);
+    if (r < 0 || r === this.heroDrawn || !cv.width || !cv.height) return;
+    const img = store.imgs[r], W = cv.width, H = cv.height;
+    const s = Math.max(W / img.naturalWidth, H / img.naturalHeight); // cover: fill the screen, keep the aspect ratio
+    const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    this.heroDrawn = r;
+  }
+  heroScroll(y, down) {
+    if (!this.heroCanvas) return;
+    const p = Math.max(0, Math.min(1, (y - this.heroTop) / this.heroDist));
+    const cue = p < 0.015, cueEl = this.heroCueRef.current;
+    if (cueEl && cue !== this.heroCueOn) {
+      this.heroCueOn = cue;
+      cueEl.style.opacity = cue ? "1" : "0";
+      cueEl.style.transform = cue ? "translateX(-50%)" : "translate(-50%,12px)";
+    }
+    if (p < 0.9) this.heroAdvanced = false;
+    // Scrolled down to the end of the film: arm the hand-off; heroTick fires it once the last frame is on screen.
+    this.heroWantAdvance = !REDUCE && !this.heroAdvanced && down && p >= 0.985 && performance.now() >= this.progUntil;
+  }
+  heroAdvance() {
+    this.heroWantAdvance = false;
+    const next = document.getElementById("intro");
+    if (!next || next.getBoundingClientRect().top < 8) return;
+    this.heroAdvanced = true;
+    this.progUntil = performance.now() + 1500;
+    if (this.lenis) this.lenis.scrollTo(next, { duration: 1.3 });
+    else next.scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Centres the pinned paragraph and measures where its pin starts/ends; runs on mount, resize and page switches.
+  introSetup() {
+    const sec = this.introRef.current;
+    if (!sec) return;
+    const pin = sec.querySelector("[data-intro-pin]"), vh = window.innerHeight;
+    const top = Math.round(Math.max(96, (vh - pin.offsetHeight) / 2));
+    if (top !== this.state.introPin) this.setState({ introPin: top });
+    const pinStart = parseFloat(getComputedStyle(sec).paddingTop) - top;
+    this.introRange = Math.max(1, pinStart + (INTRO.pinVh / 100) * vh);
+    this.introScroll();
+  }
+  introScroll() {
+    const sec = this.introRef.current;
+    if (!sec || REDUCE) return;
+    if (!this.introRange) this.introSetup();
+    const words = this.introWords && this.introWords[0] && this.introWords[0].isConnected ? this.introWords : (this.introWords = [...sec.querySelectorAll("[data-word]")]);
+    // 0 when the section reaches the top of the viewport (where the hero hands off), 1 when the pin releases.
+    const p = Math.max(0, Math.min(1, -sec.getBoundingClientRect().top / this.introRange / INTRO.end));
+    const x = p * (words.length + INTRO.ramp);
+    words.forEach((el, i) => {
+      const o = (INTRO.dim + (1 - INTRO.dim) * Math.max(0, Math.min(1, (x - i) / INTRO.ramp))).toFixed(3);
+      if (el._o !== o) { el._o = o; el.style.opacity = o; }
+    });
+  }
+
+  // Menu: slide in/out on the GPU. While it covers the page, freeze the effects underneath
+  // (particles, shader, film, videos) so nothing competes with the animation.
+  setBgPaused(on) {
+    window.__arPaused = on;
+    if (on) document.querySelectorAll("video").forEach((v) => { if (!v.paused) { v._menuPaused = true; v.pause(); } });
+    else this.kickVideos();
+  }
+  openMenu() {
+    clearTimeout(this.menuT);
+    this.setBgPaused(true);
+    this.setState({ menuOpen: true, menuShown: true, menuClosing: false });
+  }
+  // State patch that starts the slide-out (or nothing extra if the menu isn't up).
+  menuCloseState() {
+    if (!this.state.menuShown || this.state.menuClosing) return { menuOpen: false };
+    clearTimeout(this.menuT);
+    this.menuT = setTimeout(() => { this.setState({ menuShown: false, menuClosing: false }); this.setBgPaused(false); }, 620);
+    return { menuOpen: false, menuClosing: true };
+  }
+  closeMenu() { this.setState(this.menuCloseState()); }
+
+  // "What we do" rows: the hovered service expands to show its photo; one row open at a time.
+  svcPointer(e) {
+    if (!this.svcMQ || !this.svcMQ.matches || window.__arPaused) return;
+    const t = e.target instanceof Element ? e.target : null;
+    const row = t && t.closest(".svc-list [data-svc-i]");
+    if (row === this.svcHover) return;
+    this.svcHover = row;
+    clearTimeout(this.svcT);
+    this.svcT = setTimeout(() => {
+      const list = (row || this.svcOpen || {}).closest ? (row || this.svcOpen).closest(".svc-list") : null;
+      if (!list) return;
+      list.querySelectorAll("[data-svc-i].is-open").forEach((r) => { if (r !== row) r.classList.remove("is-open"); });
+      if (row) row.classList.add("is-open");
+      this.svcOpen = row;
+    }, row ? 70 : 160);
+  }
+
+  aboutTimeline() {
+    const tl = this.aboutTlRef.current;
+    if (!tl) return;
+    if (this.tlEl !== tl) { this.tlEl = tl; this.tlFill = tl.querySelector("[data-tl-fill]"); this.tlNodes = [...tl.querySelectorAll("[data-tl-node]")]; }
+    const mark = window.innerHeight * 0.62, r = tl.getBoundingClientRect();
+    const p = REDUCE ? 1 : Math.max(0, Math.min(1, (mark - r.top) / r.height));
+    this.tlFill.style.transform = `scaleY(${p.toFixed(4)})`;
+    this.tlNodes.forEach((n) => {
+      const on = REDUCE || n.getBoundingClientRect().top + 12 < mark;
+      if (n._on === on) return;
+      n._on = on;
+      const dot = n.querySelector("[data-tl-dot]");
+      dot.style.background = on ? "#C8A96E" : "#F8F5F0";
+      dot.style.boxShadow = on ? "0 0 0 6px rgba(200,169,110,0.22)" : "inset 0 0 0 1.5px rgba(10,10,10,0.25)";
+      dot.style.transform = on ? "scale(1.1)" : "none";
+    });
+  }
+
+  handleScroll() {
+    const y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
+    const down = y > this.lastY;
+    this.lastY = y;
+    const sc = y > this.heroEnd + 130; // keep the header clear while the hero film is pinned
+    if (sc !== this.state.scrolled) this.setState({ scrolled: sc });
+    this.heroScroll(y, down);
+    this.introScroll();
+    this.aboutTimeline();
+    const pb = this.progressRef.current;
+    if (pb) pb.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (REDUCE) return;
+    const vh = window.innerHeight;
+    (this.px || []).forEach((el) => {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      const p = (r.top + r.height / 2 - vh / 2) / vh;
+      el.style.transform = `translate3d(0,${(-p * parseFloat(el.getAttribute("data-parallax") || "8")).toFixed(2)}%,0)`;
+    });
+  }
+
+  hideEl(el) {
+    const t = el.getAttribute("data-reveal");
+    if (t === "line") el.style.transform = "translate3d(0,110%,0)";
+    else if (t === "draw") { el.style.transformOrigin = "left"; el.style.transform = "scaleX(0)"; }
+    else if (t === "clip") el.style.clipPath = "inset(12% 7% 12% 7% round 20px)";
+    else { el.style.opacity = "0.001"; el.style.transform = "translate3d(0,32px,0)"; }
+  }
+  showEl(el) {
+    const t = el.getAttribute("data-reveal");
+    if (t === "line" || t === "draw") el.style.transform = "none";
+    else if (t === "clip") el.style.clipPath = "inset(0% 0% 0% 0% round 20px)";
+    else { el.style.opacity = "1"; el.style.transform = "none"; }
+  }
+  prepReveals() {
+    this.px = [...document.querySelectorAll("[data-parallax]")];
+    if (REDUCE) return;
+    document.querySelectorAll("[data-reveal]:not([data-rv])").forEach((el) => {
+      el.setAttribute("data-rv", "");
+      const t = el.getAttribute("data-reveal"), d = parseFloat(el.getAttribute("data-delay") || "0");
+      const dur = t === "clip" ? 1.5 : t === "line" ? 1.2 : 1.1;
+      el.style.transition = `opacity ${dur}s ${EASE} ${d}s, transform ${dur}s ${EASE} ${d}s, clip-path ${dur}s ${EASE} ${d}s`;
+      this.hideEl(el);
+    });
+  }
+  startReveals() { this.revealOn = true; this.observeAll(); }
+  observeAll() {
+    this.io && this.io.disconnect();
+    const map = new Map();
+    document.querySelectorAll("[data-rv]").forEach((el) => {
+      const tg = el.getAttribute("data-reveal") === "line" ? el.parentElement : el;
+      if (!map.has(tg)) map.set(tg, []);
+      map.get(tg).push(el);
+    });
+    document.querySelectorAll("[data-count]").forEach((el) => { if (!map.has(el)) map.set(el, []); });
+    this.io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      (map.get(e.target) || []).forEach((el) => {
+        if (e.isIntersecting) this.showEl(el);
+        else if (e.boundingClientRect.top > 0) this.hideEl(el);
+      });
+      const k = e.target.getAttribute("data-count");
+      if (k && e.isIntersecting && this.state.counts[k] == null) this.countUp(k);
+      if (e.isIntersecting && e.target === this.baRef.current && !this.baIntro) { this.baIntro = true; setTimeout(() => this.setState({ baPos: 50 }), 900); }
+    }), { rootMargin: "0px 0px -6% 0px" });
+    map.forEach((_, tg) => this.io.observe(tg));
+  }
+  countUp(key) {
+    const st = IMPACT_STATS.concat(ABOUT_STATS).find((s) => s.key === key);
+    if (!st) return;
+    let start = null;
+    const step = (ts) => {
+      if (start === null) start = ts;
+      const lin = Math.min((ts - start) / st.dur, 1);
+      const v = lin < 1 ? Math.floor((1 - Math.pow(1 - lin, 4)) * st.value) : st.value;
+      this.setState((s) => ({ counts: { ...s.counts, [key]: v } }));
+      if (lin < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // A failed/interrupted video reloads and resumes from where it was (with backoff) instead of disappearing.
+  mediaError(el) {
+    if (!el) return;
+    if (el.tagName !== "VIDEO") { el.style.opacity = "0"; return; }
+    el._fails = (el._fails || 0) + 1;
+    if (el._fails > 10) return;
+    clearTimeout(el._rt);
+    el._rt = setTimeout(() => {
+      const t = el.currentTime || 0;
+      el.load();
+      el.addEventListener("loadedmetadata", () => { try { el.currentTime = t; } catch {} }, { once: true });
+      if (!window.__arPaused) el.play().catch(() => {});
+    }, Math.min(8000, 700 * el._fails));
+  }
+  // Watchdog: every few seconds, make sure on-screen videos are actually playing; restart paused or stalled ones.
+  videoWatch() {
+    if (document.hidden || window.__arPaused) return;
+    document.querySelectorAll("video").forEach((v) => {
+      if (v._vis === false) return; // off-screen ones are paused on purpose
+      if (v.paused) { if (!v.error) v.play().catch(() => {}); else this.mediaError(v); return; }
+      if (v._lastT === v.currentTime && v.readyState < 3) { v._stall = (v._stall || 0) + 1; if (v._stall >= 2) { v._stall = 0; this.mediaError(v); } }
+      else v._stall = 0;
+      v._lastT = v.currentTime;
+    });
+  }
+  kickVideos() {
+    this.vio && this.vio.disconnect();
+    this.vio = new IntersectionObserver((es) => es.forEach((e) => {
+      const v = e.target; v._vis = e.isIntersecting;
+      if (e.isIntersecting) { if (v.paused && !v.error) v.play().catch(() => {}); } else if (!v.paused) v.pause();
+    }), { rootMargin: "200px 0px" });
+    document.querySelectorAll("video").forEach((v) => {
+      this.vio.observe(v);
+      v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+      v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+      if (!v._kick) {
+        v._kick = 1;
+        v.addEventListener("ended", () => { v.currentTime = 0; v.play().catch(() => {}); });
+        v.addEventListener("canplay", () => { if (v.paused && v._vis !== false && !window.__arPaused) v.play().catch(() => {}); });
+        v.addEventListener("error", () => this.mediaError(v));
+        v.addEventListener("playing", () => { v._fails = 0; });
+      }
+      if (v.paused && !v.error) v.play().catch(() => {});
+    });
+  }
+  baSet(e) {
+    const el = this.baRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    this.setState({ baPos: Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100)) });
+  }
+  syncEffects() {
+    clearInterval(this.fxPoll);
+    const apply = () => {
+      const fx = window.AREffects;
+      if (!fx || !fx.setCursor) return false;
+      fx.setCursor(this.props.customCursor !== false);
+      fx.setParticles(this.props.particles !== false);
+      return true;
+    };
+    if (!apply()) this.fxPoll = setInterval(() => apply() && clearInterval(this.fxPoll), 150);
+  }
+  go(target) {
+    return (e) => {
+      e && e.preventDefault && e.preventDefault();
+      const page = PAGES.includes(target) ? target : "home";
+      const same = page === this.state.page;
+      if (!same) history.pushState(null, "", pageUrl(page)); // back/forward + reload all land on the right page
+      this.setState({ page, ...this.menuCloseState() }, () => {
+        if (page === "home" && target !== "home") {
+          setTimeout(() => { const el = document.getElementById(target); if (el) this.scrollToY(el, !same); }, 60);
+        } else this.scrollToY(0, !same);
+      });
+    };
+  }
+  async submit(e) {
+    e.preventDefault();
+    const f = this.state.form, n = {};
+    if (!f.name.trim()) n.name = "Your name is required";
+    if (!f.phone.trim()) n.phone = "Phone number is required";
+    else if (!PHONE_RE.test(f.phone.trim())) n.phone = "Enter a valid phone number (10–15 digits, optional + at the start)";
+    if (!f.email.trim()) n.email = "Email address is required";
+    else if (!EMAIL_RE.test(f.email.trim())) n.email = "Enter a valid email address";
+    if (!f.projectType) n.projectType = "Please select a project type";
+    if (!f.location.trim()) n.location = "Project location is required";
+    if (!f.message.trim()) n.message = "Please tell us about your project";
+    this.setState({ errors: n });
+    if (Object.keys(n).length) return;
+    // Honeypot: a hidden checkbox real people never tick; bots that tick it are dropped.
+    const bot = e.target && e.target.querySelector && e.target.querySelector('input[name="botcheck"]');
+    if (bot && bot.checked) { this.setState({ status: "sent", form: { ...EMPTY } }); return; }
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.startsWith("PASTE_")) {
+      console.warn("Contact form: add your Web3Forms access key (WEB3FORMS_ACCESS_KEY) to enable delivery.");
+      this.setState({ status: "error" });
+      return;
+    }
+    this.setState({ status: "sending" });
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New project enquiry: ${f.projectType}, ${f.location.trim()} (${f.name.trim()})`,
+          from_name: "AR Builder Website",
+          name: f.name.trim(),
+          email: f.email.trim(), // Web3Forms sets this as Reply-To, so you can reply straight to the client
+          phone: f.phone.trim(),
+          "Project type": f.projectType,
+          "Project location": f.location.trim(),
+          "Estimated budget": f.budget || "Not specified",
+          message: f.message.trim(),
+          botcheck: false,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) throw new Error(data.message || "Failed");
+      this.setState({ status: "sent", form: { ...EMPTY } });
+    } catch (err) {
+      console.warn("Contact form:", err && err.message);
+      this.setState({ status: "error" });
+    }
+  }
+  renderVals() {
+    const s = this.state;
+    const set = {};
+    Object.keys(EMPTY).forEach((k) => {
+      set[k] = (e) => { const v = k === "phone" ? cleanPhone(e.target.value) : e.target.value; this.setState((p) => ({ form: { ...p.form, [k]: v }, errors: { ...p.errors, [k]: undefined } })); };
+    });
+    const nav = { home: this.go("home"), projects: this.go("work"), about: this.go("about"), services: this.go("services"), contact: this.go("contact"), privacy: this.go("privacy"), terms: this.go("terms"), beforeAfter: this.go("before-after"), onSite: this.go("on-site") };
+    const navLinks = [
+      { label: "Home", go: nav.home }, { label: "About", go: nav.about }, { label: "Contact", go: nav.contact },
+    ].map((l) => ({ ...l, chars: flipChars(l.label) }));
+    const filled = REQUIRED.every((k) => String(s.form[k]).trim());
+    return {
+      isHome: s.page === "home",
+      isContact: s.page === "contact",
+      isAbout: s.page === "about",
+      aboutHeroRef: this.aboutHeroRef,
+      aboutTlRef: this.aboutTlRef,
+      milestones: MILESTONES,
+      aboutStats: ABOUT_STATS.map((st, i) => ({ ...st, num: String(s.counts[st.key] ?? 0), delay: String(i * 0.08) })),
+      isPrivacy: s.page === "privacy",
+      isTerms: s.page === "terms",
+      menuImg: s.w >= 760,
+      isDesktop: s.w >= 960,
+      loaderOn: s.loader !== "off",
+      loaderY: s.loader === "leaving" ? "-100%" : "0%",
+      // White header over the hero film; switches to dark once the solid header appears.
+      ...(() => {
+        const light = (s.page === "home" || s.page === "about") && !s.scrolled;
+        return {
+          // Fully clear over the hero film; frosted glass once the hero is over (and on every other page).
+          navBg: light ? "rgba(255,255,255,0)" : "rgba(248,245,240,0.66)",
+          navLine: light ? "rgba(255,255,255,0)" : "rgba(10,10,10,0.08)",
+          navBlur: light ? "none" : "blur(18px) saturate(160%)",
+          navLogoFilter: light ? "brightness(0) invert(1) drop-shadow(0 1px 10px rgba(0,0,0,0.25))" : "none",
+          navFg: light ? "#FFFFFF" : "#0A0A0A",
+          navFgDim: light ? "rgba(255,255,255,0.72)" : "#888880",
+          navShadow: light ? "0 1px 10px rgba(0,0,0,0.28)" : "none",
+          ctaBg: light ? "#FFFFFF" : "#0A0A0A",
+          ctaFg: light ? "#0A0A0A" : "#FFFFFF",
+        };
+      })(),
+      progressRef: this.progressRef,
+      heroRef: this.heroRef,
+      introRef: this.introRef,
+      introPinTop: s.introPin + "px",
+      introSpacer: REDUCE ? "0px" : INTRO.pinVh + "vh",
+      isMobile: s.w < 768,
+      notMobile: s.w >= 768,
+      stripItems: CAROUSEL.items.map((it, i) => ({ ...it, num: `${String(i + 1).padStart(2, "0")} / ${String(CAROUSEL.items.length).padStart(2, "0")}` })),
+      introText: INTRO_TEXT,
+      introWords: INTRO_WORDS.map((t, i) => ({ t: i < INTRO_WORDS.length - 1 ? t + " " : t })),
+      introWordO: REDUCE ? 1 : INTRO.dim,
+      swipeO: s.swiped ? 0 : 1,
+      swipeY: s.swiped ? "6px" : "0px",
+      heroCanvasRef: this.heroCanvasRef,
+      heroCueRef: this.heroCueRef,
+      heroH: REDUCE ? "100vh" : HERO.scrollVh + "vh",
+      menuOpen: s.menuOpen,
+      openMenu: () => this.openMenu(),
+      closeMenu: () => this.closeMenu(),
+      menuShown: s.menuShown,
+      menuAnim: s.menuClosing ? "menuOut .6s cubic-bezier(.76,0,.24,1) both" : "menuIn .8s cubic-bezier(.76,0,.24,1) both",
+      nav,
+      navLinks,
+      flipText: FLIP_TEXT,
+      menuLinks: navLinks.map((l, i) => ({ ...l, num: String(i + 1).padStart(2, "0"), delay: `${0.25 + i * 0.07}s` })),
+      carousel: CAROUSEL,
+      marquee: MARQUEE.map((t) => ({ t })),
+      services: SERVICES.map((x, i) => ({ ...x, idx: String(i), num: String(i + 1).padStart(2, "0"), delay: "0", cardDelay: String((i % 3) * 0.08) })),
+      montfortShots: MONTFORT.map((m, i) => ({ ...m, delay: String(i * 0.12) })),
+      baViews: BA_VIEWS.map((v, i) => ({ label: v.label, bg: i === s.baView ? "#FFFFFF" : "transparent", fg: i === s.baView ? "#0A0A0A" : "#FFFFFF", pick: () => this.setState({ baView: i, baPos: 50 }) })),
+      baRef: this.baRef,
+      baPos: s.baPos + "%",
+      baClip: (100 - s.baPos) + "%",
+      baT: s.dragging ? "opacity .6s ease" : "clip-path .9s cubic-bezier(.22,1,.36,1), opacity .6s ease",
+      baO0: s.baView === 0 ? 1 : 0,
+      baO1: s.baView === 1 ? 1 : 0,
+      baLineT: s.dragging ? "none" : "left .9s cubic-bezier(.22,1,.36,1)",
+      baDown: (e) => { e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); this.setState({ dragging: true }); this.baSet(e); },
+      baMove: (e) => { if (this.state.dragging) this.baSet(e); },
+      baUp: () => this.setState({ dragging: false }),
+      processSteps: STEPS.map((x, i) => ({ ...x, delay: String(i * 0.1) })),
+      impactStats: IMPACT_STATS.map((st, i) => ({ ...st, num: String(s.counts[st.key] ?? 0), delay: String(i * 0.08) })),
+      testimonials: TESTIMONIALS.map((x, i) => ({ ...x, delay: String(i * 0.1) })),
+      mediaErr: (e) => this.mediaError(e.currentTarget),
+      toTop: (e) => { e && e.preventDefault && e.preventDefault(); this.scrollToY(0); },
+      form: s.form,
+      errors: s.errors,
+      set,
+      dd: Object.fromEntries(Object.entries(DROPDOWNS).map(([k, d]) => {
+        const open = s.dd === k, val = s.form[k];
+        return [k, {
+          open,
+          expanded: open ? "true" : "false",
+          active: open ? `dd-${k}-${s.ddHi}` : undefined,
+          z: open ? "30" : "auto",
+          cls: open ? "dd is-open" : "dd",
+          text: val || d.placeholder,
+          valCls: val ? "dd__val" : "dd__val is-empty",
+          toggle: () => (this.state.dd === k ? this.ddClose() : this.ddOpen(k)),
+          key: (e) => this.ddKey(k, e),
+          keepFocus: (e) => e.preventDefault(), // clicking an option keeps focus on the trigger button
+          options: d.options.map((label, i) => ({
+            label,
+            id: `dd-${k}-${i}`,
+            sel: val === label ? "true" : "false",
+            cls: "dd__opt" + (val === label ? " is-sel" : "") + (open && s.ddHi === i ? " is-hi" : ""),
+            pick: () => this.ddPick(k, label),
+            hover: () => { if (this.state.ddHi !== i) this.setState({ ddHi: i }); },
+          })),
+        }];
+      })),
+      submit: (e) => this.submit(e),
+      sendDisabled: s.status === "sending" || s.status === "sent",
+      sendOpacity: filled && s.status !== "sending" ? 1 : 0.5,
+      sendLabel: s.status === "sent" ? "Message sent" : s.status === "sending" ? "Sending…" : "Submit",
+      isSent: s.status === "sent",
+      isError: s.status === "error",
+    };
+  }
+}
+</script>
+</body>
+</html>

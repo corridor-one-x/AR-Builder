@@ -1,0 +1,10 @@
+# Files and assets not used by the site (kept locally only)
+unused/
+
+# macOS
+.DS_Store
+
+# Local tooling
+.claude/
+__pycache__/
+*.log
