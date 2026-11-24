@@ -1,0 +1,11 @@
+# Cloudflare Pages (also Netlify): clean page URLs serve the site, matching vercel.json and serve.py.
+/home      /index.html  200
+/home/     /index.html  200
+/about     /index.html  200
+/about/    /index.html  200
+/contact   /index.html  200
+/contact/  /index.html  200
+/privacy   /index.html  200
+/privacy/  /index.html  200
+/terms     /index.html  200
+/terms/    /index.html  200

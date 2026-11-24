@@ -6,5 +6,11 @@ unused/
 
 # Local tooling
 .claude/
+.vscode/
 __pycache__/
+node_modules/
 *.log
+
+# Secrets (never commit)
+.env
+.env.*

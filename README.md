@@ -8,7 +8,7 @@ Website for AR Builder, architects and builders in Chennai (est. 2010).
 - **Contact** (`/contact`): enquiry form delivered by email via [Web3Forms](https://web3forms.com)
 - **Privacy** (`/privacy`) and **Terms** (`/terms`)
 
-Clean page URLs are rewritten to `index.html` by `vercel.json` (Vercel) and `serve.py` (local).
+Clean page URLs are rewritten to `index.html` by `_redirects` (Cloudflare Pages, Netlify), `vercel.json` (Vercel) and `serve.py` (local).
 
 ## Run locally
 ```bash
@@ -27,4 +27,7 @@ Then open http://localhost:4173/
 - `assets/`: images, videos, poster frames, and the hero film frames (`hero-frames/desktop`, `hero-frames/mobile`)
 
 ## Deploy
-Static site with no build step. Deploy the repository root to Vercel, Netlify or GitHub Pages.
+Static site with no build step. Hosted on Cloudflare Pages, connected to this GitHub repository:
+every push to `main` goes live automatically.
+
+Cloudflare Pages build settings: framework preset **None**, build command **empty**, build output directory **/** (repository root).
